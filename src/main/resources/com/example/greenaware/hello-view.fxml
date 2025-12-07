@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.greenaware.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.greenaware.MainController" stylesheets="/styles.css">
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+    <top>
+        <VBox styleClass="header">
+            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="nav-bar">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+
+                <Label text="🌿 GreenAware" styleClass="app-title">
+                    <font>
+                        <Font name="System Bold" size="24"/>
+                    </font>
+                </Label>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button text="Dashboard" onAction="#showDashboard" styleClass="nav-button"/>
+                <Button text="Incidents" onAction="#showIncidents" styleClass="nav-button"/>
+                <Button text="Categories" onAction="#showCategories" styleClass="nav-button"/>
+                <Button text="Actions" onAction="#showActions" styleClass="nav-button"/>
+                <Button text="Waste Logs" onAction="#showWasteLogs" styleClass="nav-button"/>
+                <Button text="Environment" onAction="#showEnvironment" styleClass="nav-button"/>
+                <Button text="Events" onAction="#showEvents" styleClass="nav-button"/>
+                <Button text="Export/Import" onAction="#showExportImport" styleClass="nav-button"/>
+            </HBox>
+        </VBox>
+    </top>
+
+</BorderPane>

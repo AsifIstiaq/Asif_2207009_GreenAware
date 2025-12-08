@@ -2,6 +2,10 @@
     -fx-background-color: linear-gradient(to bottom, #27ae60, #2ecc71);
 }
 
+.content-area {
+    -fx-background-color: #ecf0f1;
+}
+
 .nav-bar {
     -fx-background-color: transparent;
 }
@@ -29,4 +33,88 @@
 
 .nav-button:pressed {
     -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.content-container {
+    -fx-background-color: white;
+}
+
+.page-title {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+.primary-button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.primary-button:hover {
+    -fx-background-color: #27ae60;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #229954;
+}
+
+.action-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.action-button:hover {
+    -fx-background-color: #2980b9;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.success-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.success-button:hover {
+    -fx-background-color: #229954;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.danger-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.danger-button:hover {
+    -fx-background-color: #c0392b;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.info-label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 13px;
 }

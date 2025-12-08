@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="15" styleClass="content-container">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Action &amp; Cleanup Workflow" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28"/>
+        </font>
+    </Label>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="Add Action" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Edit" styleClass="action-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Mark Completed" styleClass="success-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Delete" styleClass="danger-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Refresh" styleClass="action-button"/>
+    </HBox>
+
+    <TableView fx:id="actionsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
+            <TableColumn text="Incident ID" prefWidth="90" fx:id="incidentIdColumn"/>
+            <TableColumn text="Worker" prefWidth="130" fx:id="workerColumn"/>
+            <TableColumn text="Action Note" prefWidth="250" fx:id="actionNoteColumn"/>
+            <TableColumn text="Deadline" prefWidth="100" fx:id="deadlineColumn"/>
+            <TableColumn text="Status" prefWidth="100" fx:id="statusColumn"/>
+            <TableColumn text="Completed Date" prefWidth="120" fx:id="completedDateColumn"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="statusLabel" text="Total: 0 actions" styleClass="info-label">
+        <font>
+            <Font size="13"/>
+        </font>
+    </Label>
+
+</VBox>

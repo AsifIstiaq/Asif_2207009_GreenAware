@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="15" styleClass="content-container">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Category Manager" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28"/>
+        </font>
+    </Label>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="Add Category" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Edit" styleClass="action-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Delete" styleClass="danger-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Refresh" styleClass="action-button"/>
+    </HBox>
+
+    <TableView fx:id="categoriesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="60" fx:id="idColumn"/>
+            <TableColumn text="Name" prefWidth="200" fx:id="nameColumn"/>
+            <TableColumn text="Description" prefWidth="350" fx:id="descriptionColumn"/>
+            <TableColumn text="Color Code" prefWidth="120" fx:id="colorColumn"/>
+            <TableColumn text="Created At" prefWidth="180" fx:id="createdAtColumn"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="statusLabel" text="Total: 0 categories" styleClass="info-label">
+        <font>
+            <Font size="13"/>
+        </font>
+    </Label>
+
+</VBox>

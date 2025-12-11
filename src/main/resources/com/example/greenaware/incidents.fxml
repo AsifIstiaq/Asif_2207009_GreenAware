@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.IncidentController" spacing="15" styleClass="content-container">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Pollution Incident Manager" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="28"/>
+        </font>
+    </Label>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="Add Incident" onAction="#addIncident" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+    </HBox>
+
+    <TableView fx:id="incidentsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
+            <TableColumn text="Type" prefWidth="150" fx:id="typeColumn"/>
+            <TableColumn text="Location" prefWidth="200" fx:id="locationColumn"/>
+            <TableColumn text="Date" prefWidth="120" fx:id="dateColumn"/>
+            <TableColumn text="Severity" prefWidth="100" fx:id="severityColumn"/>
+            <TableColumn text="Status" prefWidth="120" fx:id="statusColumn"/>
+            <TableColumn text="Category" prefWidth="150" fx:id="categoryColumn"/>
+            <TableColumn text="Reporter" prefWidth="150" fx:id="reporterColumn"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button text="Edit" onAction="#editIncident" styleClass="action-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Delete" onAction="#deleteIncident" styleClass="danger-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="recordCountLabel" text="Total: 0 incidents" styleClass="info-label">
+            <font>
+                <Font size="13"/>
+            </font>
+        </Label>
+    </HBox>
+
+</VBox>

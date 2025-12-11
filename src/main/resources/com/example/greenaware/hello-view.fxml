@@ -25,12 +25,12 @@
 
                 <Button text="Dashboard" onAction="#showDashboard" styleClass="nav-button"/>
                 <Button text="Incidents" onAction="#showIncidents" styleClass="nav-button"/>
-                <Button text="Categories" onAction="#showCategories" styleClass="nav-button"/>
                 <Button text="Actions" onAction="#showActions" styleClass="nav-button"/>
-                <Button text="Waste Logs" onAction="#showWasteLogs" styleClass="nav-button"/>
-                <Button text="Environment" onAction="#showEnvironment" styleClass="nav-button"/>
-                <Button text="Events" onAction="#showEvents" styleClass="nav-button"/>
+                <Button text="User Reports" onAction="#showUserReports" styleClass="nav-button"/>
                 <Button text="Export/Import" onAction="#showExportImport" styleClass="nav-button"/>
+
+                <Region prefWidth="20"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
             </HBox>
         </VBox>
     </top>

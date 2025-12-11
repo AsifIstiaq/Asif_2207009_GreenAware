@@ -130,3 +130,71 @@
     -fx-text-fill: #7f8c8d;
     -fx-font-size: 13px;
 }
+
+.logout-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.logout-button:hover {
+    -fx-background-color: #c0392b;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.logout-button:pressed {
+    -fx-background-color: #a93226;
+}
+
+.status-bar {
+    -fx-background-color: #34495e;
+    -fx-padding: 10 20 10 20;
+}
+
+.status-text {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 12px;
+}
+
+.dialog-container {
+    -fx-background-color: white;
+    -fx-padding: 20;
+}
+
+.dialog-title {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.form-grid {
+    -fx-background-color: white;
+}
+
+.form-label {
+    -fx-text-fill: #34495e;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 10 5 0;
+}
+
+.secondary-button {
+    -fx-background-color: #95a5a6;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #7f8c8d;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

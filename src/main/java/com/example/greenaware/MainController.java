@@ -17,6 +17,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        showDashboard();
     }
 
     @FXML
@@ -25,28 +26,12 @@ public class MainController {
 
     @FXML
     public void showIncidents() {
-    }
-
-    @FXML
-    public void showCategories() {
-        loadView("/com/example/greenaware/categories.fxml", "Categories");
+        loadView("/com/example/greenaware/incidents.fxml", "Incidents");
     }
 
     @FXML
     public void showActions() {
         loadView("/com/example/greenaware/actions.fxml", "Actions");
-    }
-
-    @FXML
-    public void showWasteLogs() {
-    }
-
-    @FXML
-    public void showEnvironment() {
-    }
-
-    @FXML
-    public void showEvents() {
     }
 
     @FXML
@@ -70,5 +55,4 @@ public class MainController {
             alert.show();
         }
     }
-
 }

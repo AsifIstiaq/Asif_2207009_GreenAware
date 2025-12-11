@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="15" styleClass="dialog-container">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Incident Details" styleClass="dialog-title">
+        <font>
+            <Font name="System Bold" size="20"/>
+        </font>
+    </Label>
+
+    <ScrollPane fitToWidth="true" prefHeight="500">
+        <GridPane hgap="15" vgap="12" styleClass="form-grid">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="Incident Type:*" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="incidentTypeField" promptText="e.g., Air Pollution" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
+
+            <Label text="Location:*" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="locationField" promptText="e.g., Main Street" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Date:*" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
+            <DatePicker fx:id="datePicker" promptText="Select date" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
+
+            <Label text="Severity:*" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="severityCombo" promptText="Select severity" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
+
+            <Label text="Category:*" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="categoryCombo" promptText="Select category" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300"/>
+
+            <Label text="Status:*" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="form-label"/>
+            <ComboBox fx:id="statusCombo" promptText="Select status" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="300"/>
+
+            <Label text="Reporter Name:" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="reporterNameField" promptText="Enter reporter name" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <Label text="Reporter Contact:" GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextField fx:id="reporterContactField" promptText="Phone or email" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+            <Label text="Image Path:" GridPane.rowIndex="8" GridPane.columnIndex="0" styleClass="form-label"/>
+            <HBox spacing="10" GridPane.rowIndex="8" GridPane.columnIndex="1">
+                <TextField fx:id="imagePathField" promptText="Image file path" HBox.hgrow="ALWAYS"/>
+                <Button text="Browse..." styleClass="action-button"/>
+            </HBox>
+
+            <Label text="Description:" GridPane.rowIndex="9" GridPane.columnIndex="0" styleClass="form-label"/>
+            <TextArea fx:id="descriptionArea" promptText="Enter detailed description..."
+                      GridPane.rowIndex="9" GridPane.columnIndex="1" prefRowCount="4" wrapText="true"/>
+
+        </GridPane>
+    </ScrollPane>
+
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button fx:id="saveButton" text="Save" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button fx:id="cancelButton" text="Cancel" styleClass="secondary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+    </HBox>
+
+</VBox>

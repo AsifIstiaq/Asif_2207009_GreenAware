@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="15" styleClass="dialog-container">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Action Details" styleClass="dialog-title">
+        <font>
+            <Font name="System Bold" size="20"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="15" vgap="12" styleClass="form-grid">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <Label text="Incident ID:*" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="incidentIdField" promptText="Enter incident ID" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
+
+        <Label text="Assigned Worker:*" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="workerNameField" promptText="Enter worker name" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300"/>
+
+        <Label text="Deadline:*" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
+        <DatePicker fx:id="deadlinePicker" promptText="Select deadline" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
+
+        <Label text="Status:*" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
+        <ComboBox fx:id="statusCombo" promptText="Select status" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
+
+        <Label text="Action Note:*" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextArea fx:id="actionNoteArea" promptText="Enter action details..."
+                  GridPane.rowIndex="4" GridPane.columnIndex="1" prefRowCount="5" wrapText="true" prefWidth="300"/>
+
+    </GridPane>
+
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button fx:id="saveButton" text="Save" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button fx:id="cancelButton" text="Cancel" styleClass="secondary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+    </HBox>
+
+</VBox>

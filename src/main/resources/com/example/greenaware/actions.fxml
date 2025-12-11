@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.ActionController" spacing="15" styleClass="content-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="15" styleClass="content-container">
 
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
@@ -19,28 +18,28 @@
     </Label>
 
     <HBox spacing="15" alignment="CENTER_LEFT">
-        <Button text="Add Action" onAction="#addAction" styleClass="primary-button">
+        <Button text="Add Action" styleClass="primary-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Edit" onAction="#editAction" styleClass="action-button">
+        <Button text="Edit" styleClass="action-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Mark Completed" onAction="#markCompleted" styleClass="success-button">
+        <Button text="Mark Completed" styleClass="success-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Delete" onAction="#deleteAction" styleClass="danger-button">
+        <Button text="Delete" styleClass="danger-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
         <Region HBox.hgrow="ALWAYS"/>
-        <Button text="Refresh" onAction="#refreshActions" styleClass="action-button"/>
+        <Button text="Refresh" styleClass="action-button"/>
     </HBox>
 
     <TableView fx:id="actionsTable" VBox.vgrow="ALWAYS">

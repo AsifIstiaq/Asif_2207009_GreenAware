@@ -10,7 +10,11 @@ module com.example.greenaware {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
     opens com.example.greenaware to javafx.fxml;
     exports com.example.greenaware;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }

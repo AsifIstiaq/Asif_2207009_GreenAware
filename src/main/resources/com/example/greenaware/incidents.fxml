@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.IncidentController" spacing="15" styleClass="content-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="15" styleClass="content-container">
 
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
@@ -19,7 +18,7 @@
     </Label>
 
     <HBox spacing="15" alignment="CENTER_LEFT">
-        <Button text="Add Incident" onAction="#addIncident" styleClass="primary-button">
+        <Button text="Add Incident" styleClass="primary-button">
             <font>
                 <Font size="14"/>
             </font>
@@ -40,12 +39,12 @@
     </TableView>
 
     <HBox spacing="15" alignment="CENTER_LEFT">
-        <Button text="Edit" onAction="#editIncident" styleClass="action-button">
+        <Button text="Edit" styleClass="action-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Delete" onAction="#deleteIncident" styleClass="danger-button">
+        <Button text="Delete" styleClass="danger-button">
             <font>
                 <Font size="14"/>
             </font>

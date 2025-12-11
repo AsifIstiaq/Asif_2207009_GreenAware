@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.AdminLoginController" styleClass="content-container">
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="login-container" maxWidth="450">
+            <padding>
+                <Insets top="40" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <Label text="🔐 GreenAware Admin" styleClass="login-title">
+                <font>
+                    <Font name="System Bold" size="36"/>
+                </font>
+            </Label>
+
+            <Label text="Administrator Portal" styleClass="login-subtitle">
+                <font>
+                    <Font size="18"/>
+                </font>
+            </Label>
+
+            <Separator prefWidth="200"/>
+
+            <VBox spacing="8">
+                <Label text="Admin Username:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <TextField fx:id="usernameField" promptText="Enter admin username" prefHeight="40"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Admin Password:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <PasswordField fx:id="passwordField" promptText="Enter admin password" prefHeight="40"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+            <Button text="Admin Login" onAction="#handleAdminLogin" styleClass="primary-button"
+                    prefWidth="200" prefHeight="45">
+                <font>
+                    <Font size="16"/>
+                </font>
+            </Button>
+
+            <Label text="🔒 For authorized administrators only" styleClass="info-label">
+                <font>
+                    <Font size="12"/>
+                </font>
+            </Label>
+
+            <Button text="← Back to Home" onAction="#handleBack" styleClass="action-button">
+                <font>
+                    <Font size="12"/>
+                </font>
+            </Button>
+        </VBox>
+    </center>
+</BorderPane>

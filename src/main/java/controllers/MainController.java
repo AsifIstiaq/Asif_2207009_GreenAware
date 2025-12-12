@@ -25,6 +25,7 @@ public class MainController {
 
     @FXML
     public void showDashboard() {
+        loadView("/com/example/greenaware/admin_dashboard.fxml", "AdminDashboard");
     }
 
     @FXML

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="20" styleClass="content-container">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🌿 User Dashboard" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="welcomeLabel" text="Welcome, User!" styleClass="info-label">
+            <font>
+                <Font size="16"/>
+            </font>
+        </Label>
+        <Button text="Logout" styleClass="danger-button"/>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Total Reports" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="totalReportsLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Pending" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="pendingLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="In Progress" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="inProgressLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Resolved" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="resolvedLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="15">
+        <Button text="Submit New Report" styleClass="primary-button">
+            <font>
+                <Font size="14"/>
+            </font>
+        </Button>
+        <Button text="Refresh" styleClass="action-button"/>
+    </HBox>
+
+    <Label text="My Reports" styleClass="section-title">
+        <font>
+            <Font name="System Bold" size="20"/>
+        </font>
+    </Label>
+
+    <TableView fx:id="reportsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
+            <TableColumn text="Category" prefWidth="150" fx:id="categoryColumn"/>
+            <TableColumn text="Location" prefWidth="180" fx:id="locationColumn"/>
+            <TableColumn text="Date" prefWidth="100" fx:id="dateColumn"/>
+            <TableColumn text="Severity" prefWidth="100" fx:id="severityColumn"/>
+            <TableColumn text="Status" prefWidth="120" fx:id="statusColumn"/>
+            <TableColumn text="Submitted" prefWidth="150" fx:id="submittedColumn"/>
+        </columns>
+    </TableView>
+
+</VBox>

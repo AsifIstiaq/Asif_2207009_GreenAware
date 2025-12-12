@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true" styleClass="scroll-pane">
+
+    <VBox spacing="20" styleClass="dashboard-container">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <Label text="Dashboard Overview" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+
+        <HBox spacing="20" alignment="CENTER">
+            <VBox styleClass="stat-card" spacing="10">
+                <padding>
+                    <Insets top="20" right="30" bottom="20" left="30"/>
+                </padding>
+                <Label text="Total Incidents" styleClass="stat-label">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <Label fx:id="totalIncidentsLabel" text="0" styleClass="stat-value">
+                    <font>
+                        <Font name="System Bold" size="36"/>
+                    </font>
+                </Label>
+            </VBox>
+
+            <VBox styleClass="stat-card" spacing="10">
+                <padding>
+                    <Insets top="20" right="30" bottom="20" left="30"/>
+                </padding>
+                <Label text="Active Incidents" styleClass="stat-label">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <Label fx:id="activeIncidentsLabel" text="0" styleClass="stat-value-active">
+                    <font>
+                        <Font name="System Bold" size="36"/>
+                    </font>
+                </Label>
+            </VBox>
+
+            <VBox styleClass="stat-card" spacing="10">
+                <padding>
+                    <Insets top="20" right="30" bottom="20" left="30"/>
+                </padding>
+                <Label text="Resolved" styleClass="stat-label">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <Label fx:id="resolvedIncidentsLabel" text="0" styleClass="stat-value-resolved">
+                    <font>
+                        <Font name="System Bold" size="36"/>
+                    </font>
+                </Label>
+            </VBox>
+
+        </HBox>
+
+        <HBox spacing="20" VBox.vgrow="ALWAYS">
+            <VBox styleClass="chart-card" spacing="10" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Incidents by Category" styleClass="chart-title">
+                    <font>
+                        <Font name="System Bold" size="16"/>
+                    </font>
+                </Label>
+                <PieChart fx:id="categoryPieChart" minHeight="300"/>
+            </VBox>
+
+            <VBox styleClass="chart-card" spacing="10" HBox.hgrow="ALWAYS">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label text="Severity Distribution" styleClass="chart-title">
+                    <font>
+                        <Font name="System Bold" size="16"/>
+                    </font>
+                </Label>
+                <BarChart fx:id="severityBarChart" legendVisible="false" minHeight="300">
+                    <xAxis>
+                        <CategoryAxis label="Severity Level" side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Count" side="LEFT"/>
+                    </yAxis>
+                </BarChart>
+            </VBox>
+        </HBox>
+
+        <VBox styleClass="chart-card" spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Monthly Incident Trends" styleClass="chart-title">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            <LineChart fx:id="monthlyTrendsChart" legendVisible="false" minHeight="250">
+                <xAxis>
+                    <CategoryAxis label="Month" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Number of Incidents" side="LEFT"/>
+                </yAxis>
+            </LineChart>
+        </VBox>
+
+        <VBox styleClass="chart-card" spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Most Polluted Areas (Top 5)" styleClass="chart-title">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            <TableView fx:id="pollutedAreasTable" minHeight="200">
+                <columns>
+                    <TableColumn text="Rank" fx:id="rankColumn"/>
+                    <TableColumn text="Location" prefWidth="400" fx:id="locationColumn"/>
+                    <TableColumn text="Incident Count" prefWidth="150" fx:id="countColumn"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="15">
+            <Button text="Refresh Dashboard" styleClass="primary-button">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Button>
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" maxHeight="30" maxWidth="30"/>
+        </HBox>
+
+    </VBox>
+</ScrollPane>

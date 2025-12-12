@@ -32,7 +32,7 @@ public class UserLoginController {
         try {
             User user = userDAO.validateUserLogin(username, password);
             if (user != null) {
-                // after successfully logged in it will redirect to user panel
+                loadUserDashboard();
             } else {
                 showError("Invalid username or password");
             }
@@ -66,6 +66,21 @@ public class UserLoginController {
             stage.setScene(scene);
         } catch (Exception e) {
             showError("Error returning to home: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void loadUserDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/user_dashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("GreenAware - User Dashboard");
+        } catch (Exception e) {
+            showError("Error loading dashboard: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="20" styleClass="content-container">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="User Reports Management" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Total Reports" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="totalReportsLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Pending" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="pendingLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="In Progress" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="inProgressLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Resolved" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="resolvedLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="15">
+        <Button text="Refresh" styleClass="action-button"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Filter by Status:" styleClass="info-label">
+            <font>
+                <Font size="13"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="statusFilterCombo" prefWidth="150"/>
+    </HBox>
+
+    <Label text="All User Reports" styleClass="section-title">
+        <font>
+            <Font name="System Bold" size="20"/>
+        </font>
+    </Label>
+
+    <TableView fx:id="reportsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
+            <TableColumn text="Reporter" prefWidth="120" fx:id="reporterColumn"/>
+            <TableColumn text="Category" prefWidth="150" fx:id="categoryColumn"/>
+            <TableColumn text="Location" prefWidth="150" fx:id="locationColumn"/>
+            <TableColumn text="Date" prefWidth="100" fx:id="dateColumn"/>
+            <TableColumn text="Severity" prefWidth="90" fx:id="severityColumn"/>
+            <TableColumn text="Status" prefWidth="110" fx:id="statusColumn"/>
+            <TableColumn text="Submitted" prefWidth="150" fx:id="submittedColumn"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="15">
+        <Button text="Mark as In Progress" styleClass="action-button"/>
+        <Button text="Mark as Resolved" styleClass="success-button"/>
+        <Button text="Mark as Pending" styleClass="warning-button"/>
+    </HBox>
+
+</VBox>

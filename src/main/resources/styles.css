@@ -427,3 +427,11 @@
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
+
+.section-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}

@@ -45,6 +45,7 @@ public class MainController {
 
     @FXML
     public void showExportImport() {
+        loadView("/com/example/greenaware/export_import.fxml", "Export/Import");
     }
 
     @FXML

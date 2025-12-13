@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" fitToHeight="true" styleClass="content-container">
+
+    <VBox spacing="20" styleClass="content-container">
+
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <Label text="Data Export / Import Module" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+
+        <VBox spacing="15" styleClass="section-card">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Export Data" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <Label text="Select data to export:">
+                        <font>
+                            <Font size="14"/>
+                        </font>
+                    </Label>
+                    <ComboBox fx:id="exportTypeCombo" promptText="Choose export type" prefWidth="300">
+                    </ComboBox>
+                </VBox>
+
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <Label text="Export file path (Text Format):">
+                        <font>
+                            <Font size="14"/>
+                        </font>
+                    </Label>
+                    <HBox spacing="10">
+                        <TextField fx:id="exportPathField" promptText="C:\exports\data.txt" HBox.hgrow="ALWAYS"/>
+                        <Button text="Browse..." styleClass="action-button"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Button text="Export Data" styleClass="primary-button">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Button>
+                <ProgressIndicator fx:id="exportProgressIndicator" visible="false" maxHeight="30" maxWidth="30"/>
+                <Label fx:id="exportStatusLabel" styleClass="info-label"/>
+            </HBox>
+        </VBox>
+
+        <VBox spacing="15" styleClass="section-card">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Import Data" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="20"/>
+                </font>
+            </Label>
+
+            <VBox spacing="10">
+                <Label text="Import file path (JSON Format):">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <HBox spacing="10">
+                    <TextField fx:id="importPathField" promptText="C:\imports\data.json" HBox.hgrow="ALWAYS"/>
+                    <Button text="Browse..." styleClass="action-button"/>
+                </HBox>
+            </VBox>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Button text="Import Data" styleClass="primary-button">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Button>
+                <ProgressIndicator fx:id="importProgressIndicator" visible="false" maxHeight="30" maxWidth="30"/>
+                <Label fx:id="importStatusLabel" styleClass="info-label"/>
+            </HBox>
+
+        </VBox>
+
+    </VBox>
+
+</ScrollPane>

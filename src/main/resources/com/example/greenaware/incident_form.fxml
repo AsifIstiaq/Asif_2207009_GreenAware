@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.IncidentFormController"
       spacing="15" styleClass="dialog-container">
 
     <padding>
@@ -35,9 +35,6 @@
 
             <Label text="Severity:*" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
             <ComboBox fx:id="severityCombo" promptText="Select severity" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
-
-            <Label text="Category:*" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
-            <ComboBox fx:id="categoryCombo" promptText="Select category" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300"/>
 
             <Label text="Status:*" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="form-label"/>
             <ComboBox fx:id="statusCombo" promptText="Select status" GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="300"/>

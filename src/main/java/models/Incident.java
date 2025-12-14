@@ -13,20 +13,17 @@ public class Incident {
     private final StringProperty imagePath;
     private final StringProperty status;
     private final StringProperty description;
-    private final IntegerProperty categoryId;
     private final IntegerProperty assignedWorkerId;
     private final StringProperty createdAt;
-    private final StringProperty categoryName;
     private final StringProperty workerName;
 
     public Incident() {
-        this(0, "", "", "", "", "", "", "", "PENDING", "", 0, 0, "", "", "");
+        this(0, "", "", "", "", "", "", "", "PENDING", "", 0, "", "");
     }
 
     public Incident(int id, String incidentType, String location, String date, String severity,
                     String reporterName, String reporterContact, String imagePath, String status,
-                    String description, int categoryId, int assignedWorkerId, String createdAt,
-                    String categoryName, String workerName) {
+                    String description, int assignedWorkerId, String createdAt, String workerName) {
         this.id = new SimpleIntegerProperty(id);
         this.incidentType = new SimpleStringProperty(incidentType);
         this.location = new SimpleStringProperty(location);
@@ -37,10 +34,8 @@ public class Incident {
         this.imagePath = new SimpleStringProperty(imagePath);
         this.status = new SimpleStringProperty(status);
         this.description = new SimpleStringProperty(description);
-        this.categoryId = new SimpleIntegerProperty(categoryId);
         this.assignedWorkerId = new SimpleIntegerProperty(assignedWorkerId);
         this.createdAt = new SimpleStringProperty(createdAt);
-        this.categoryName = new SimpleStringProperty(categoryName);
         this.workerName = new SimpleStringProperty(workerName);
     }
 
@@ -84,10 +79,6 @@ public class Incident {
     public void setDescription(String value) { description.set(value); }
     public StringProperty descriptionProperty() { return description; }
 
-    public int getCategoryId() { return categoryId.get(); }
-    public void setCategoryId(int value) { categoryId.set(value); }
-    public IntegerProperty categoryIdProperty() { return categoryId; }
-
     public int getAssignedWorkerId() { return assignedWorkerId.get(); }
     public void setAssignedWorkerId(int value) { assignedWorkerId.set(value); }
     public IntegerProperty assignedWorkerIdProperty() { return assignedWorkerId; }
@@ -95,10 +86,6 @@ public class Incident {
     public String getCreatedAt() { return createdAt.get(); }
     public void setCreatedAt(String value) { createdAt.set(value); }
     public StringProperty createdAtProperty() { return createdAt; }
-
-    public String getCategoryName() { return categoryName.get(); }
-    public void setCategoryName(String value) { categoryName.set(value); }
-    public StringProperty categoryNameProperty() { return categoryName; }
 
     public String getWorkerName() { return workerName.get(); }
     public void setWorkerName(String value) { workerName.set(value); }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" fitToHeight="true" styleClass="content-container">
+
+    <VBox spacing="20" styleClass="content-container">
+
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Label text="Submit Pollution Report" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+
+        <VBox spacing="15" styleClass="section-card">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <VBox spacing="8">
+                <Label text="Category: *">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="categoryCombo" prefWidth="300" promptText="Select pollution category"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Location:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <TextField fx:id="locationField" promptText="Enter the location of the incident"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Date Observed:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <DatePicker fx:id="datePicker" prefWidth="200"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Severity Level:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="severityCombo" prefWidth="200" promptText="Select severity"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Description:">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <TextArea fx:id="descriptionArea" promptText="Describe the incident in detail..."
+                          prefRowCount="5" wrapText="true"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Image (Optional):">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Label>
+                <HBox spacing="10">
+                    <TextField fx:id="imagePathField" promptText="No image selected" editable="false" HBox.hgrow="ALWAYS"/>
+                    <Button text="Browse..." styleClass="action-button"/>
+                </HBox>
+            </VBox>
+
+            <Label text="Reporter Information" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+
+            <HBox spacing="20">
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Your Name:">
+                        <font>
+                            <Font size="13"/>
+                        </font>
+                    </Label>
+                    <TextField fx:id="reporterNameField" editable="false"/>
+                </VBox>
+
+                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                    <Label text="Your Email:">
+                        <font>
+                            <Font size="13"/>
+                        </font>
+                    </Label>
+                    <TextField fx:id="reporterEmailField" editable="false"/>
+                </VBox>
+            </HBox>
+
+            <Label fx:id="statusLabel" wrapText="true"/>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Button text="Submit Report" styleClass="primary-button">
+                    <font>
+                        <Font size="14"/>
+                    </font>
+                </Button>
+                <Button text="↩ Back to Dashboard" styleClass="action-button"/>
+            </HBox>
+        </VBox>
+
+    </VBox>
+
+</ScrollPane>

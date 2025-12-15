@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.User;
+import utils.Session;
 
 public class UserLoginController {
 
@@ -32,8 +33,10 @@ public class UserLoginController {
         try {
             User user = userDAO.validateUserLogin(username, password);
             if (user != null) {
+                Session.setUser(user);
                 loadUserDashboard();
-            } else {
+            }
+            else {
                 showError("Invalid username or password");
             }
         } catch (Exception e) {

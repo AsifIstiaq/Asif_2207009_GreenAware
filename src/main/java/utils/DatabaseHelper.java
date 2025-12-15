@@ -93,6 +93,44 @@ public class DatabaseHelper {
                 )
             """);
 
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS report_categories (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL UNIQUE
+                )
+            """);
+
+            stmt.execute("""
+                INSERT OR IGNORE INTO report_categories (name) VALUES
+                ('Air Pollution'),
+                ('Water Pollution'),
+                ('Soil Contamination'),
+                ('Noise Pollution'),
+                ('Illegal Dumping'),
+                ('Hazardous Waste'),
+                ('Sewage Overflow'),
+                ('Industrial Emissions'),
+                ('Littering'),
+                ('Other')
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS reports (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    category_name TEXT NOT NULL,
+                    incident_type TEXT,
+                    location TEXT NOT NULL,
+                    date_reported TEXT NOT NULL,
+                    severity TEXT NOT NULL,
+                    description TEXT,
+                    image_path TEXT,
+                    status TEXT DEFAULT 'PENDING',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            """);
+
             System.out.println("Database initialized successfully");
         } catch (SQLException e) {
             System.err.println("Error initializing database: " + e.getMessage());

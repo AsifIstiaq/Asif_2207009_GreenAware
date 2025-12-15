@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="20" styleClass="content-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserDashboardController" spacing="20" styleClass="content-container">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
@@ -23,7 +23,7 @@
                 <Font size="16"/>
             </font>
         </Label>
-        <Button text="Logout" styleClass="danger-button"/>
+        <Button text="Logout" onAction="#handleLogout" styleClass="danger-button"/>
     </HBox>
 
     <HBox spacing="20">
@@ -93,12 +93,12 @@
     </HBox>
 
     <HBox spacing="15">
-        <Button text="Submit New Report" styleClass="primary-button">
+        <Button text="Submit New Report" onAction="#handleNewReport" styleClass="primary-button">
             <font>
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Refresh" styleClass="action-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="action-button"/>
     </HBox>
 
     <Label text="My Reports" styleClass="section-title">

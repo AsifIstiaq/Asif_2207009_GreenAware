@@ -12,6 +12,7 @@ module com.example.greenaware {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires annotations;
 
     opens com.example.greenaware to javafx.fxml;
     exports com.example.greenaware;

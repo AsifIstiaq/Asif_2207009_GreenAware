@@ -8,6 +8,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import dao.ActionDAO;
 import dao.IncidentDAO;
+import dao.ReportDAO;
 import javafx.collections.ObservableList;
 import models.Action;
 import models.Incident;
@@ -18,6 +19,7 @@ public class DataLoadingService {
 
     private final IncidentDAO incidentDAO;
     private final ActionDAO actionDAO;
+    private final ReportDAO reportDAO;
 
     public DataLoadingService() {
         this.executorService = Executors.newFixedThreadPool(4);
@@ -25,6 +27,7 @@ public class DataLoadingService {
 
         this.incidentDAO = new IncidentDAO();
         this.actionDAO = new ActionDAO();
+        this.reportDAO = new ReportDAO();
     }
 
     public Future<ObservableList<Action>> loadActions() {

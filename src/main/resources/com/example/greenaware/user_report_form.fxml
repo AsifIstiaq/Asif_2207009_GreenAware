@@ -6,6 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.UserReportController"
             fitToWidth="true" fitToHeight="true" styleClass="content-container">
 
     <VBox spacing="20" styleClass="content-container">
@@ -79,7 +80,7 @@
                 </Label>
                 <HBox spacing="10">
                     <TextField fx:id="imagePathField" promptText="No image selected" editable="false" HBox.hgrow="ALWAYS"/>
-                    <Button text="Browse..." styleClass="action-button"/>
+                    <Button text="Browse..." onAction="#handleBrowseImage" styleClass="action-button"/>
                 </HBox>
             </VBox>
 
@@ -112,12 +113,12 @@
             <Label fx:id="statusLabel" wrapText="true"/>
 
             <HBox spacing="15" alignment="CENTER_LEFT">
-                <Button text="Submit Report" styleClass="primary-button">
+                <Button text="Submit Report" onAction="#handleSubmitReport" styleClass="primary-button">
                     <font>
                         <Font size="14"/>
                     </font>
                 </Button>
-                <Button text="↩ Back to Dashboard" styleClass="action-button"/>
+                <Button text="↩ Back to Dashboard" onAction="#handleBack" styleClass="action-button"/>
             </HBox>
         </VBox>
 

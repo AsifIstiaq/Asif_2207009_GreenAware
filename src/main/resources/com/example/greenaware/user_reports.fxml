@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="20" styleClass="content-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserReportsController" spacing="20" styleClass="content-container">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
@@ -86,7 +86,7 @@
     </HBox>
 
     <HBox spacing="15">
-        <Button text="Refresh" styleClass="action-button"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="action-button"/>
         <Region HBox.hgrow="ALWAYS"/>
         <Label text="Filter by Status:" styleClass="info-label">
             <font>
@@ -116,9 +116,9 @@
     </TableView>
 
     <HBox spacing="15">
-        <Button text="Mark as In Progress" styleClass="action-button"/>
-        <Button text="Mark as Resolved" styleClass="success-button"/>
-        <Button text="Mark as Pending" styleClass="warning-button"/>
+        <Button text="Mark as In Progress" onAction="#handleMarkInProgress" styleClass="action-button"/>
+        <Button text="Mark as Resolved" onAction="#handleMarkResolved" styleClass="success-button"/>
+        <Button text="Mark as Pending" onAction="#handleMarkPending" styleClass="warning-button"/>
     </HBox>
 
 </VBox>

@@ -125,7 +125,7 @@ public class UserReportController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/user_dashboard.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) locationField.getScene().getWindow();
+            Stage stage = (Stage) statusLabel.getScene().getWindow();
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
             stage.setScene(scene);

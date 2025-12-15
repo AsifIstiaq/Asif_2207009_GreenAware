@@ -86,4 +86,91 @@ public class ReportDAO {
         }
         return reports;
     }
+
+    public ObservableList<Report> getAllReports() throws SQLException {
+        ObservableList<Report> reports = FXCollections.observableArrayList();
+        String query = """
+            SELECT r.*, u.full_name as reporter_name
+            FROM reports r
+            LEFT JOIN users u ON r.user_id = u.id
+            ORDER BY r.created_at DESC
+        """;
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                reports.add(new Report(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("category_name"),
+                        rs.getString("incident_type"),
+                        rs.getString("location"),
+                        rs.getString("date_reported"),
+                        rs.getString("severity"),
+                        rs.getString("description"),
+                        rs.getString("image_path"),
+                        rs.getString("status"),
+                        rs.getString("reporter_name"),
+                        rs.getString("created_at")
+                ));
+            }
+        }
+        return reports;
+    }
+
+    public void updateReportStatus(int reportId, String status) throws SQLException {
+        String query = "UPDATE reports SET status = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, status);
+            pstmt.setInt(2, reportId);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public int getPendingReportCount() throws SQLException {
+        String query = "SELECT COUNT(*) FROM reports WHERE status = 'PENDING'";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public int getInProgressReportCount() throws SQLException {
+        String query = "SELECT COUNT(*) FROM reports WHERE status = 'IN_PROGRESS'";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public int getResolvedReportCount() throws SQLException {
+        String query = "SELECT COUNT(*) FROM reports WHERE status = 'RESOLVED'";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 }

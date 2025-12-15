@@ -12,9 +12,8 @@ public class ActionDAO {
     public ObservableList<Action> getAllActions() throws SQLException {
         ObservableList<Action> actions = FXCollections.observableArrayList();
         String query = """
-            SELECT a.*, w.name as worker_name
+            SELECT a.*
             FROM actions a
-            LEFT JOIN workers w ON a.worker_id = w.id
             ORDER BY a.deadline DESC
         """;
 
@@ -43,9 +42,8 @@ public class ActionDAO {
     public ObservableList<Action> getActionsByIncidentId(int incidentId) throws SQLException {
         ObservableList<Action> actions = FXCollections.observableArrayList();
         String query = """
-            SELECT a.*, w.name as worker_name
+            SELECT a.*
             FROM actions a
-            LEFT JOIN workers w ON a.worker_id = w.id
             WHERE a.incident_id = ?
             ORDER BY a.created_at DESC
         """;
@@ -76,9 +74,9 @@ public class ActionDAO {
 
     public void insertAction(Action action) throws SQLException {
         String query = """
-            INSERT INTO actions (incident_id, worker_id, action_note, deadline, status,
+            INSERT INTO actions (incident_id, worker_id, worker_name, action_note, deadline, status,
             resolution_details, completed_date)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
         try (Connection conn = DatabaseHelper.getConnection();
@@ -86,18 +84,19 @@ public class ActionDAO {
 
             pstmt.setInt(1, action.getIncidentId());
             pstmt.setInt(2, action.getWorkerId());
-            pstmt.setString(3, action.getActionNote());
-            pstmt.setString(4, action.getDeadline());
-            pstmt.setString(5, action.getStatus());
-            pstmt.setString(6, action.getResolutionDetails());
-            pstmt.setString(7, action.getCompletedDate());
+            pstmt.setString(3, action.getWorkerName());
+            pstmt.setString(4, action.getActionNote());
+            pstmt.setString(5, action.getDeadline());
+            pstmt.setString(6, action.getStatus());
+            pstmt.setString(7, action.getResolutionDetails());
+            pstmt.setString(8, action.getCompletedDate());
             pstmt.executeUpdate();
         }
     }
 
     public void updateAction(Action action) throws SQLException {
         String query = """
-            UPDATE actions SET incident_id = ?, worker_id = ?, action_note = ?, deadline = ?,
+            UPDATE actions SET incident_id = ?, worker_id = ?, worker_name = ?, action_note = ?, deadline = ?,
             status = ?, resolution_details = ?, completed_date = ? WHERE id = ?
         """;
 
@@ -106,12 +105,13 @@ public class ActionDAO {
 
             pstmt.setInt(1, action.getIncidentId());
             pstmt.setInt(2, action.getWorkerId());
-            pstmt.setString(3, action.getActionNote());
-            pstmt.setString(4, action.getDeadline());
-            pstmt.setString(5, action.getStatus());
-            pstmt.setString(6, action.getResolutionDetails());
-            pstmt.setString(7, action.getCompletedDate());
-            pstmt.setInt(8, action.getId());
+            pstmt.setString(3, action.getWorkerName());
+            pstmt.setString(4, action.getActionNote());
+            pstmt.setString(5, action.getDeadline());
+            pstmt.setString(6, action.getStatus());
+            pstmt.setString(7, action.getResolutionDetails());
+            pstmt.setString(8, action.getCompletedDate());
+            pstmt.setInt(9, action.getId());
             pstmt.executeUpdate();
         }
     }

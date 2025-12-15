@@ -26,7 +26,6 @@ public class IncidentController {
     @FXML private TableColumn<Incident, String> dateColumn;
     @FXML private TableColumn<Incident, String> severityColumn;
     @FXML private TableColumn<Incident, String> statusColumn;
-    @FXML private TableColumn<Incident, String> categoryColumn;
     @FXML private TableColumn<Incident, String> reporterColumn;
 
     @FXML private Label recordCountLabel;

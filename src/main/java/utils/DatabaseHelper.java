@@ -61,6 +61,7 @@ public class DatabaseHelper {
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     incident_id INTEGER NOT NULL,
                     worker_id INTEGER,
+                    worker_name TEXT,
                     action_note TEXT,
                     deadline TEXT,
                     status TEXT DEFAULT 'PENDING',

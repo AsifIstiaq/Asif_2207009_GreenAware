@@ -7,9 +7,8 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.UserLoginController" styleClass="content-container">
-
     <center>
-        <VBox alignment="CENTER" spacing="20" styleClass="login-container" maxWidth="450">
+        <VBox alignment="CENTER" spacing="20" maxWidth="450">
             <padding>
                 <Insets top="40" right="40" bottom="40" left="40"/>
             </padding>
@@ -25,8 +24,6 @@
                     <Font size="18"/>
                 </font>
             </Label>
-
-            <Separator prefWidth="200"/>
 
             <VBox spacing="8">
                 <Label text="Username:">

@@ -33,6 +33,7 @@ public class HomeController {
                 stage.setScene(scene);
                 stage.setTitle(title);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

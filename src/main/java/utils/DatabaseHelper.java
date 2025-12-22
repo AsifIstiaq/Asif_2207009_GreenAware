@@ -27,39 +27,8 @@ public class DatabaseHelper {
         try (Statement stmt = conn.createStatement()) {
 
             stmt.execute("""
-                CREATE TABLE IF NOT EXISTS workers (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    phone TEXT,
-                    email TEXT,
-                    specialization TEXT,
-                    status TEXT DEFAULT 'AVAILABLE',
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            """);
-
-            stmt.execute("""
-                CREATE TABLE IF NOT EXISTS incidents (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    incident_type TEXT NOT NULL,
-                    location TEXT NOT NULL,
-                    date TEXT NOT NULL,
-                    severity TEXT NOT NULL,
-                    reporter_name TEXT,
-                    reporter_contact TEXT,
-                    image_path TEXT,
-                    status TEXT DEFAULT 'PENDING',
-                    description TEXT,
-                    assigned_worker_id INTEGER,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (assigned_worker_id) REFERENCES workers(id)
-                )
-            """);
-
-            stmt.execute("""
                 CREATE TABLE IF NOT EXISTS actions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    incident_id INTEGER NOT NULL,
                     worker_id INTEGER,
                     worker_name TEXT,
                     action_note TEXT,
@@ -67,9 +36,7 @@ public class DatabaseHelper {
                     status TEXT DEFAULT 'PENDING',
                     resolution_details TEXT,
                     completed_date TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (incident_id) REFERENCES incidents(id),
-                    FOREIGN KEY (worker_id) REFERENCES workers(id)
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """);
 
@@ -92,27 +59,6 @@ public class DatabaseHelper {
                     password TEXT NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            """);
-
-            stmt.execute("""
-                CREATE TABLE IF NOT EXISTS report_categories (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL UNIQUE
-                )
-            """);
-
-            stmt.execute("""
-                INSERT OR IGNORE INTO report_categories (name) VALUES
-                ('Air Pollution'),
-                ('Water Pollution'),
-                ('Soil Contamination'),
-                ('Noise Pollution'),
-                ('Illegal Dumping'),
-                ('Hazardous Waste'),
-                ('Sewage Overflow'),
-                ('Industrial Emissions'),
-                ('Littering'),
-                ('Other')
             """);
 
             stmt.execute("""

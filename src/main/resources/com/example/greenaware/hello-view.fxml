@@ -24,10 +24,9 @@
                 <Region HBox.hgrow="ALWAYS"/>
 
                 <Button text="Dashboard" onAction="#showDashboard" styleClass="nav-button"/>
-                <Button text="Incidents" onAction="#showIncidents" styleClass="nav-button"/>
+                <Button text="Gallery" onAction="#showGallery" styleClass="nav-button"/>
                 <Button text="Actions" onAction="#showActions" styleClass="nav-button"/>
                 <Button text="User Reports" onAction="#showUserReports" styleClass="nav-button"/>
-                <Button text="Export/Import" onAction="#showExportImport" styleClass="nav-button"/>
 
                 <Region prefWidth="20"/>
                 <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>

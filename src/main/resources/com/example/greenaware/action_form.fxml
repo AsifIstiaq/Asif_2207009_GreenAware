@@ -23,9 +23,6 @@
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
 
-        <Label text="Incident ID:*" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="form-label"/>
-        <TextField fx:id="incidentIdField" promptText="Enter incident ID" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="300"/>
-
         <Label text="Assigned Worker:*" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
         <TextField fx:id="workerNameField" promptText="Enter worker name" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300"/>
 

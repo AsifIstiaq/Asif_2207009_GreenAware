@@ -451,3 +451,29 @@
     -fx-border-width: 1;
     -fx-border-radius: 10;
 }
+
+.gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.gallery-scroll .viewport {
+    -fx-background-color: white;
+}
+
+.gallery-scroll .scroll-bar:vertical {
+    -fx-background-color: #ecf0f1;
+}
+
+.gallery-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #bdc3c7;
+    -fx-background-radius: 5;
+}
+
+.gallery-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #95a5a6;
+}
+
+.gallery-container {
+    -fx-background-color: white;
+}

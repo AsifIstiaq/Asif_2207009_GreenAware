@@ -19,7 +19,6 @@ public class ActionController {
 
     @FXML private TableView<Action> actionsTable;
     @FXML private TableColumn<Action, Integer> idColumn;
-    @FXML private TableColumn<Action, Integer> incidentIdColumn;
     @FXML private TableColumn<Action, String> workerColumn;
     @FXML private TableColumn<Action, String> actionNoteColumn;
     @FXML private TableColumn<Action, String> deadlineColumn;
@@ -42,10 +41,6 @@ public class ActionController {
     private void setupTable() {
             idColumn.setCellValueFactory(
                     cell -> cell.getValue().idProperty().asObject()
-            );
-
-            incidentIdColumn.setCellValueFactory(
-                    cell -> cell.getValue().incidentIdProperty().asObject()
             );
 
             workerColumn.setCellValueFactory(

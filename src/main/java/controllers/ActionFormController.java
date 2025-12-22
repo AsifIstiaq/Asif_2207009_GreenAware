@@ -16,7 +16,6 @@ import models.Action;
 
 public class ActionFormController {
 
-    @FXML private TextField incidentIdField;
     @FXML private TextField workerNameField;
     @FXML private DatePicker deadlinePicker;
     @FXML private ComboBox<String> statusCombo;
@@ -47,8 +46,6 @@ public class ActionFormController {
         this.currentAction = action;
 
         if (action != null) {
-            incidentIdField.setText(String.valueOf(action.getIncidentId()));
-            incidentIdField.setDisable(true);
             deadlinePicker.setValue(LocalDate.parse(action.getDeadline()));
             statusCombo.setValue(action.getStatus());
             actionNoteArea.setText(action.getActionNote());
@@ -57,19 +54,6 @@ public class ActionFormController {
     }
 
     private void saveAction() {
-        if (incidentIdField.getText().trim().isEmpty()) {
-            showError("Incident ID is required");
-            return;
-        }
-
-        int incidentId;
-        try {
-            incidentId = Integer.parseInt(incidentIdField.getText().trim());
-        } catch (NumberFormatException e) {
-            showError("Incident ID must be a number");
-            return;
-        }
-
         if (workerNameField.getText().trim().isEmpty()) {
             showError("Worker name is required");
             return;
@@ -93,7 +77,6 @@ public class ActionFormController {
             if (currentAction == null) {
                 Action newAction = new Action(
                         0,
-                        incidentId,
                         0,
                         actionNoteArea.getText().trim(),
                         deadlinePicker.getValue().toString(),

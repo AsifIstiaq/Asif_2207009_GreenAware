@@ -28,9 +28,8 @@ public class MainController {
         loadView("/com/example/greenaware/admin_dashboard.fxml", "Admin Dashboard");
     }
 
-    @FXML
-    public void showIncidents() {
-        loadView("/com/example/greenaware/incidents.fxml", "Incidents");
+    public void showGallery() {
+        loadView("/com/example/greenaware/gallery.fxml", "Gallery");
     }
 
     @FXML
@@ -41,11 +40,6 @@ public class MainController {
     @FXML
     public void showUserReports() {
         loadView("/com/example/greenaware/user_reports.fxml", "User Reports");
-    }
-
-    @FXML
-    public void showExportImport() {
-        loadView("/com/example/greenaware/export_import.fxml", "Export/Import");
     }
 
     @FXML

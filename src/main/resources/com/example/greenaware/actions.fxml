@@ -45,7 +45,6 @@
     <TableView fx:id="actionsTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
-            <TableColumn text="Incident ID" prefWidth="90" fx:id="incidentIdColumn"/>
             <TableColumn text="Worker" prefWidth="130" fx:id="workerColumn"/>
             <TableColumn text="Action Note" prefWidth="250" fx:id="actionNoteColumn"/>
             <TableColumn text="Deadline" prefWidth="100" fx:id="deadlineColumn"/>

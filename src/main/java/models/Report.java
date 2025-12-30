@@ -18,9 +18,10 @@ public class Report {
     private final StringProperty status;
     private final StringProperty reporterName;
     private final StringProperty createdAt;
+    private final StringProperty finalPhotoPath;
 
     public Report(int id, int userId, String categoryName, String incidentType, String location, String dateReported,
-                  String severity, String description, String imagePath, String status,
+                  String severity, String description, String imagePath, String finalPhotoPath, String status,
                   String reporterName, String createdAt) {
         this.id = new SimpleIntegerProperty(id);
         this.userId = new SimpleIntegerProperty(userId);
@@ -31,6 +32,7 @@ public class Report {
         this.severity = new SimpleStringProperty(severity);
         this.description = new SimpleStringProperty(description);
         this.imagePath = new SimpleStringProperty(imagePath);
+        this.finalPhotoPath = new SimpleStringProperty(finalPhotoPath);
         this.status = new SimpleStringProperty(status);
         this.reporterName = new SimpleStringProperty(reporterName);
         this.createdAt = new SimpleStringProperty(createdAt);
@@ -52,4 +54,12 @@ public class Report {
     public StringProperty statusProperty() { return status; }
     public StringProperty reporterNameProperty() { return reporterName; }
     public StringProperty createdAtProperty() { return createdAt; }
+    public String getFinalPhotoPath() { return finalPhotoPath.get(); }
+    public void setFinalPhotoPath(String value) { finalPhotoPath.set(value); }
+    public StringProperty finalPhotoPathProperty() { return finalPhotoPath; }
+    public String getImagePath() { return imagePath.get(); }
+    public void setImagePath(String value) { imagePath.set(value); }
+    public StringProperty imagePathProperty() { return imagePath; }
+    public String getDateReported() { return dateReported.get(); }
+    public void setDateReported(String value) { dateReported.set(value); }
 }

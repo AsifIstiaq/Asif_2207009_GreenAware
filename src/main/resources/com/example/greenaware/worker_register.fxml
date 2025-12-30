@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.WorkerRegisterController"
+      alignment="CENTER" spacing="20" styleClass="root"
+      stylesheets="@/styles.css">
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <VBox alignment="CENTER" spacing="20" maxWidth="400">
+        <Text text="Worker Registration" styleClass="title"/>
+        <Text text="Join our team of environmental workers" styleClass="subtitle"/>
+
+        <VBox spacing="10" VBox.vgrow="ALWAYS">
+            <Label text="Full Name:"/>
+            <TextField fx:id="nameField" promptText="Enter your full name"/>
+
+            <Label text="Email:"/>
+            <TextField fx:id="emailField" promptText="Enter your email"/>
+
+            <Label text="Username:"/>
+            <TextField fx:id="usernameField" promptText="Enter your username"/>
+
+            <Label text="Phone Number:"/>
+            <TextField fx:id="phoneField" promptText="Enter your phone number"/>
+
+            <Label text="Password:"/>
+            <PasswordField fx:id="passwordField" promptText="Enter password"/>
+
+            <Label text="Confirm Password:"/>
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirm password"/>
+
+            <Label text="Specialization:"/>
+            <ComboBox fx:id="specializationCombo" promptText="Select specialization" maxWidth="Infinity">
+                <items>
+                    <javafx.collections.FXCollections fx:factory="observableArrayList">
+                        <java.lang.String fx:value="Waste Management"/>
+                        <java.lang.String fx:value="Water Treatment"/>
+                        <java.lang.String fx:value="Air Quality"/>
+                        <java.lang.String fx:value="Landscaping"/>
+                        <java.lang.String fx:value="Tree Planting"/>
+                        <java.lang.String fx:value="Recycling"/>
+                        <java.lang.String fx:value="Sanitation"/>
+                        <java.lang.String fx:value="General Maintenance"/>
+                    </javafx.collections.FXCollections>
+                </items>
+            </ComboBox>
+
+            <Label fx:id="messageLabel" styleClass="message-label" wrapText="true"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Register" onAction="#handleRegister" styleClass="primary-button"/>
+                <Button text="Back to Login" onAction="#handleBackToLogin" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</VBox>

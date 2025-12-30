@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.WorkerLoginController"
+      alignment="CENTER" spacing="20" styleClass="root"
+      stylesheets="/styles.css">
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <VBox alignment="CENTER" spacing="20" maxWidth="400">
+        <Text text="Worker Login" styleClass="title"/>
+        <Text text="Access your work assignments" styleClass="subtitle"/>
+
+        <VBox spacing="15" VBox.vgrow="ALWAYS">
+            <Label text="Username:"/>
+            <TextField fx:id="emailField" promptText="Enter your username"/>
+
+            <Label text="Password:"/>
+            <PasswordField fx:id="passwordField" promptText="Enter your password"/>
+
+            <Label fx:id="messageLabel" styleClass="message-label" wrapText="true"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Login" onAction="#handleLogin" styleClass="primary-button"/>
+                <Button text="Register" onAction="#handleRegister" styleClass="secondary-button"/>
+            </HBox>
+
+            <Hyperlink text="Back to Main Menu" onAction="#handleBackToMain" alignment="CENTER"/>
+        </VBox>
+    </VBox>
+</VBox>

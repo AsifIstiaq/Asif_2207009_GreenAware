@@ -12,14 +12,15 @@ public class Action {
     private final StringProperty completedDate;
     private final StringProperty createdAt;
     private final StringProperty workerName;
+    private final StringProperty location;
 
     public Action() {
-        this(0, 0, "", "", "PENDING", "", "", "", "");
+        this(0, 0, "", "", "PENDING", "", "", "", "","");
     }
 
     public Action(int id, int workerId, String actionNote, String deadline,
                   String status, String resolutionDetails, String completedDate, String createdAt,
-                  String workerName) {
+                  String workerName, String location) {
         this.id = new SimpleIntegerProperty(id);
         this.workerId = new SimpleIntegerProperty(workerId);
         this.actionNote = new SimpleStringProperty(actionNote);
@@ -29,6 +30,7 @@ public class Action {
         this.completedDate = new SimpleStringProperty(completedDate);
         this.createdAt = new SimpleStringProperty(createdAt);
         this.workerName = new SimpleStringProperty(workerName);
+        this.location = new SimpleStringProperty(location);
     }
 
     public int getId() { return id.get(); }
@@ -51,4 +53,8 @@ public class Action {
     public String getWorkerName() { return workerName.get(); }
     public void setWorkerName(String value) { workerName.set(value); }
     public StringProperty workerNameProperty() { return workerName; }
+    public void setWorkerId(int value) { workerId.set(value); }
+    public String getLocation() { return location.get(); }
+    public void setLocation(String value) { location.set(value); }
+    public StringProperty locationProperty() { return location; }
 }

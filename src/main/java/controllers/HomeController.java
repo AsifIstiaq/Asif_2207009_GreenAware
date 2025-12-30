@@ -14,6 +14,11 @@ public class HomeController {
     }
 
     @FXML
+    public void handleWorkerLogin() {
+        loadScene("/com/example/greenaware/worker_login.fxml", "GreenAware - Worker Login");
+    }
+
+    @FXML
     public void handleAdminLogin() {
         loadScene("/com/example/greenaware/admin_login.fxml", "GreenAware - Admin Login");
     }

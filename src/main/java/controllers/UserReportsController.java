@@ -126,7 +126,15 @@ public class UserReportsController {
 
     @FXML
     public void handleMarkResolved() {
-        updateSelectedReportStatus("RESOLVED");
+//        updateSelectedReportStatus("RESOLVED");
+        Report selectedReport = reportsTable.getSelectionModel().getSelectedItem();
+        if (selectedReport == null) {
+            showWarning("Please select a report first");
+            return;
+        }
+
+        // Open dialog to select final photo from work progress
+        showSelectFinalPhotoDialog(selectedReport);
     }
 
     @FXML
@@ -156,8 +164,159 @@ public class UserReportsController {
     }
 
     @FXML
+    public void handleViewDetails() {
+        Report selectedReport = reportsTable.getSelectionModel().getSelectedItem();
+        if (selectedReport == null) {
+            showError("Please select a report to view details");
+            return;
+        }
+
+        showReportDetailsDialog(selectedReport);
+    }
+
+    @FXML
     public void handleRefresh() {
         loadDashboardData();
+    }
+
+    private void showSelectFinalPhotoDialog(Report report) {
+        javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+        fileChooser.setTitle("Select Completed Work Photo");
+        fileChooser.getExtensionFilters().addAll(
+                new javafx.stage.FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+
+        // Set initial directory to progress photos if exists
+        java.io.File progressPhotosDir = new java.io.File("db/progress_photos");
+        if (progressPhotosDir.exists()) {
+            fileChooser.setInitialDirectory(progressPhotosDir);
+        }
+
+        java.io.File selectedFile = fileChooser.showOpenDialog(reportsTable.getScene().getWindow());
+        if (selectedFile != null) {
+            new Thread(() -> {
+                try {
+                    // Update final photo path
+                    reportDAO.updateFinalPhoto(report.getId(), selectedFile.getAbsolutePath());
+                    // Update status to resolved
+                    reportDAO.updateReportStatus(report.getId(), "RESOLVED");
+
+                    Platform.runLater(() -> {
+                        showSuccess("Report marked as resolved with completion photo!");
+                        loadDashboardData();
+                    });
+                } catch (Exception e) {
+                    Platform.runLater(() -> showError("Error updating report: " + e.getMessage()));
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+
+    private void showReportDetailsDialog(Report report) {
+        javafx.scene.control.Dialog<Void> dialog = new javafx.scene.control.Dialog<>();
+        dialog.setTitle("Report Details");
+        dialog.setHeaderText("Report #" + report.getId() + " - " + report.getStatus());
+
+        javafx.scene.layout.VBox content = new javafx.scene.layout.VBox(15);
+        content.setPadding(new javafx.geometry.Insets(20));
+        content.setAlignment(javafx.geometry.Pos.TOP_LEFT);
+
+        // Report information
+        javafx.scene.layout.GridPane grid = new javafx.scene.layout.GridPane();
+        grid.setHgap(15);
+        grid.setVgap(10);
+
+        grid.add(new Label("Category:"), 0, 0);
+        grid.add(new Label(report.getCategoryName()), 1, 0);
+
+        grid.add(new Label("Location:"), 0, 1);
+        grid.add(new Label(report.getLocation()), 1, 1);
+
+        grid.add(new Label("Date Reported:"), 0, 2);
+        grid.add(new Label(report.getDateReported()), 1, 2);
+
+        grid.add(new Label("Severity:"), 0, 3);
+        grid.add(new Label(report.getSeverity()), 1, 3);
+
+        grid.add(new Label("Status:"), 0, 4);
+        Label statusLabel = new Label(report.getStatus());
+        statusLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: " +
+                (report.getStatus().equals("RESOLVED") ? "#27ae60" :
+                        report.getStatus().equals("IN_PROGRESS") ? "#f39c12" : "#e74c3c") + ";");
+        grid.add(statusLabel, 1, 4);
+
+        content.getChildren().add(grid);
+
+        // Photos section
+        if (report.getImagePath() != null || report.getFinalPhotoPath() != null) {
+            content.getChildren().add(new javafx.scene.control.Separator());
+            Label photosLabel = new Label("Photos:");
+            photosLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+            content.getChildren().add(photosLabel);
+
+            javafx.scene.layout.HBox photosBox = new javafx.scene.layout.HBox(20);
+            photosBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+            // Before photo
+            if (report.getImagePath() != null && !report.getImagePath().isEmpty()) {
+                javafx.scene.layout.VBox beforeBox = new javafx.scene.layout.VBox(10);
+                beforeBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+                Label beforeLabel = new Label("BEFORE");
+                beforeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+
+                javafx.scene.image.ImageView beforeImage = new javafx.scene.image.ImageView();
+                try {
+                    java.io.File imageFile = new java.io.File(report.getImagePath());
+                    if (imageFile.exists()) {
+                        javafx.scene.image.Image image = new javafx.scene.image.Image(imageFile.toURI().toString());
+                        beforeImage.setImage(image);
+                        beforeImage.setFitWidth(300);
+                        beforeImage.setPreserveRatio(true);
+                        beforeBox.getChildren().addAll(beforeLabel, beforeImage);
+                        photosBox.getChildren().add(beforeBox);
+                    }
+                } catch (Exception e) {
+                    beforeBox.getChildren().add(new Label("Failed to load before photo"));
+                }
+            }
+
+            // After photo (if resolved)
+            if (report.getFinalPhotoPath() != null && !report.getFinalPhotoPath().isEmpty()) {
+                javafx.scene.layout.VBox afterBox = new javafx.scene.layout.VBox(10);
+                afterBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+                Label afterLabel = new Label("AFTER");
+                afterLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #27ae60;");
+
+                javafx.scene.image.ImageView afterImage = new javafx.scene.image.ImageView();
+                try {
+                    java.io.File imageFile = new java.io.File(report.getFinalPhotoPath());
+                    if (imageFile.exists()) {
+                        javafx.scene.image.Image image = new javafx.scene.image.Image(imageFile.toURI().toString());
+                        afterImage.setImage(image);
+                        afterImage.setFitWidth(300);
+                        afterImage.setPreserveRatio(true);
+                        afterBox.getChildren().addAll(afterLabel, afterImage);
+                        photosBox.getChildren().add(afterBox);
+                    }
+                } catch (Exception e) {
+                    afterBox.getChildren().add(new Label("Failed to load after photo"));
+                }
+            }
+
+            content.getChildren().add(photosBox);
+        }
+
+        javafx.scene.control.ScrollPane scrollPane = new javafx.scene.control.ScrollPane(content);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefHeight(600);
+
+        dialog.getDialogPane().setContent(scrollPane);
+        dialog.getDialogPane().getButtonTypes().add(javafx.scene.control.ButtonType.OK);
+        dialog.getDialogPane().setPrefWidth(700);
+        dialog.showAndWait();
     }
 
     private void showError(String message) {

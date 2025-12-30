@@ -38,6 +38,11 @@ public class MainController {
     }
 
     @FXML
+    public void showWorkers() {
+        loadView("/com/example/greenaware/workers.fxml", "Workers");
+    }
+
+    @FXML
     public void showUserReports() {
         loadView("/com/example/greenaware/user_reports.fxml", "User Reports");
     }

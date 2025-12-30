@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<?import javafx.collections.FXCollections?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.WorkProgressFormController"
+      spacing="15" styleClass="content-container"
+      stylesheets="/styles.css">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Submit Work Progress" styleClass="page-title">
+        <font>
+            <Font name="System Bold" size="24"/>
+        </font>
+    </Label>
+
+    <Separator/>
+
+    <GridPane hgap="15" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="30"/>
+            <ColumnConstraints percentWidth="70"/>
+        </columnConstraints>
+
+        <Label text="Assignment ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="assignmentIdLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="locationLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="deadlineLabel" text="" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Separator GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+
+        <Label text="Status:*" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="statusCombo" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity">
+            <items>
+                <javafx.collections.FXCollections fx:factory="observableArrayList">
+                    <java.lang.String fx:value="PENDING"/>
+                    <java.lang.String fx:value="IN_PROGRESS"/>
+                    <java.lang.String fx:value="COMPLETED"/>
+                </javafx.collections.FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Description:*" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextArea fx:id="descriptionArea" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                  promptText="Describe the work done and any observations..."
+                  wrapText="true" prefRowCount="4"/>
+
+        <Label text="Photo:*" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="6" spacing="10">
+            <HBox spacing="10">
+                <TextField fx:id="photoPathField" editable="false" HBox.hgrow="ALWAYS"
+                           promptText="No photo selected"/>
+                <Button text="Browse" onAction="#handleBrowsePhoto" styleClass="secondary-button"/>
+            </HBox>
+            <ImageView fx:id="photoPreview" fitHeight="200" fitWidth="300" preserveRatio="true"/>
+        </VBox>
+    </GridPane>
+
+    <Label fx:id="messageLabel" styleClass="message-label" wrapText="true"/>
+
+    <Separator/>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Submit Progress" onAction="#handleSubmit" styleClass="success-button"/>
+        <Button text="Cancel" onAction="#handleCancel" styleClass="secondary-button"/>
+    </HBox>
+</VBox>

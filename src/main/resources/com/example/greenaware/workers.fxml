@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.WorkersController"
+      spacing="20" styleClass="content-container">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="Workers Management" styleClass="page-title">
+            <font>
+                <Font name="System Bold" size="28"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Total Workers" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="totalWorkersLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Available" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="availableLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox styleClass="stat-card" spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Total Progress Reports" styleClass="stat-label">
+                <font>
+                    <Font size="14"/>
+                </font>
+            </Label>
+            <Label fx:id="totalProgressLabel" text="0" styleClass="stat-value">
+                <font>
+                    <Font name="System Bold" size="32"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+
+    <TabPane VBox.vgrow="ALWAYS">
+        <Tab text="Workers" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+
+                <TableView fx:id="workersTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="workerIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="workerNameColumn" text="Name" prefWidth="150"/>
+                        <TableColumn fx:id="workerPhoneColumn" text="Phone" prefWidth="120"/>
+                        <TableColumn fx:id="workerEmailColumn" text="Email" prefWidth="180"/>
+                        <TableColumn fx:id="workerSpecializationColumn" text="Specialization" prefWidth="150"/>
+                        <TableColumn fx:id="workerStatusColumn" text="Status" prefWidth="100"/>
+                    </columns>
+                </TableView>
+
+                <HBox spacing="15">
+                    <Button text="View Worker Details" onAction="#handleViewWorkerDetails" styleClass="primary-button"/>
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Work Progress Reports" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+
+                <TableView fx:id="progressTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="progressIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="progressWorkerColumn" text="Worker" prefWidth="150"/>
+                        <TableColumn fx:id="progressPhoneColumn" text="Phone" prefWidth="120"/>
+                        <TableColumn fx:id="progressLocationColumn" text="Location" prefWidth="180"/>
+                        <TableColumn fx:id="progressStatusColumn" text="Status" prefWidth="100"/>
+                        <TableColumn fx:id="progressDateColumn" text="Submitted" prefWidth="150"/>
+                    </columns>
+                </TableView>
+
+                <HBox spacing="15">
+                    <Button text="View Details" onAction="#handleViewProgressDetails" styleClass="primary-button"/>
+                    <Button text="Filter by Status" onAction="#handleFilterProgress" styleClass="secondary-button"/>
+                </HBox>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

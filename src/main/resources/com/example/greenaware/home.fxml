@@ -80,6 +80,37 @@
                             <Insets top="30" right="40" bottom="30" left="40"/>
                         </padding>
 
+                        <Label text="🔧" styleClass="icon-label">
+                            <font>
+                                <Font size="48"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Worker Portal" styleClass="card-title">
+                            <font>
+                                <Font name="System Bold" size="20"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Manage work assignments" wrapText="true" alignment="CENTER">
+                            <font>
+                                <Font size="13"/>
+                            </font>
+                        </Label>
+
+                        <Button text="Worker Login" onAction="#handleWorkerLogin" styleClass="success-button"
+                                prefWidth="180" prefHeight="45">
+                            <font>
+                                <Font size="14"/>
+                            </font>
+                        </Button>
+                    </VBox>
+
+                    <VBox alignment="CENTER" spacing="15" styleClass="login-option-card">
+                        <padding>
+                            <Insets top="30" right="40" bottom="30" left="40"/>
+                        </padding>
+
                         <Label text="🔐" styleClass="icon-label">
                             <font>
                                 <Font size="48"/>

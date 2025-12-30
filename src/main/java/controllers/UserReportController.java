@@ -45,7 +45,10 @@ public class UserReportController {
         }
 
         try {
-            categoryCombo.setItems(reportDAO.getAllCategories());
+//            categoryCombo.setItems(reportDAO.getAllCategories());
+            categoryCombo.setItems(javafx.collections.FXCollections.observableArrayList(
+                    "Air pollution", "Noise pollution", "Water pollution"
+            ));
         } catch (Exception e) {
             showError("Error loading categories: " + e.getMessage());
         }

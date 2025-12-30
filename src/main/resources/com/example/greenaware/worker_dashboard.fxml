@@ -5,20 +5,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserDashboardController" spacing="20" styleClass="content-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.WorkerDashboardController" spacing="20" styleClass="content-container">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
     <HBox alignment="CENTER_LEFT" spacing="15">
-        <Label text="🌿 User Dashboard" styleClass="page-title">
+        <Label text="🔧 Worker Dashboard" styleClass="page-title">
             <font>
                 <Font name="System Bold" size="28"/>
             </font>
         </Label>
         <Region HBox.hgrow="ALWAYS"/>
-        <Label fx:id="welcomeLabel" text="Welcome, User!" styleClass="info-label">
+        <Label fx:id="welcomeLabel" text="Welcome, Worker!" styleClass="info-label">
             <font>
                 <Font size="16"/>
             </font>
@@ -31,12 +32,12 @@
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
-            <Label text="Total Reports" styleClass="stat-label">
+            <Label text="Total Assignments" styleClass="stat-label">
                 <font>
                     <Font size="14"/>
                 </font>
             </Label>
-            <Label fx:id="totalReportsLabel" text="0" styleClass="stat-value">
+            <Label fx:id="totalAssignmentsLabel" text="0" styleClass="stat-value">
                 <font>
                     <Font name="System Bold" size="32"/>
                 </font>
@@ -79,12 +80,12 @@
             <padding>
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
-            <Label text="Resolved" styleClass="stat-label">
+            <Label text="Completed" styleClass="stat-label">
                 <font>
                     <Font size="14"/>
                 </font>
             </Label>
-            <Label fx:id="resolvedLabel" text="0" styleClass="stat-value">
+            <Label fx:id="completedLabel" text="0" styleClass="stat-value">
                 <font>
                     <Font name="System Bold" size="32"/>
                 </font>
@@ -92,32 +93,27 @@
         </VBox>
     </HBox>
 
-    <HBox spacing="15">
-        <Button text="Submit New Report" onAction="#handleNewReport" styleClass="primary-button">
+    <VBox spacing="15" VBox.vgrow="ALWAYS">
+        <Label text="My Work Assignments" styleClass="section-title">
             <font>
-                <Font size="14"/>
+                <Font name="System Bold" size="20"/>
             </font>
-        </Button>
-        <Button text="View Details" onAction="#handleViewDetails" styleClass="action-button"/>
-        <Button text="Refresh" onAction="#handleRefresh" styleClass="action-button"/>
-    </HBox>
+        </Label>
 
-    <Label text="My Reports" styleClass="section-title">
-        <font>
-            <Font name="System Bold" size="20"/>
-        </font>
-    </Label>
+        <TableView fx:id="assignmentsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="locationColumn" text="Location" prefWidth="200"/>
+                <TableColumn fx:id="actionNoteColumn" text="Work Description" prefWidth="250"/>
+                <TableColumn fx:id="deadlineColumn" text="Deadline" prefWidth="120"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="120"/>
+            </columns>
+        </TableView>
 
-    <TableView fx:id="reportsTable" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
-            <TableColumn text="Category" prefWidth="150" fx:id="categoryColumn"/>
-            <TableColumn text="Location" prefWidth="180" fx:id="locationColumn"/>
-            <TableColumn text="Date" prefWidth="100" fx:id="dateColumn"/>
-            <TableColumn text="Severity" prefWidth="100" fx:id="severityColumn"/>
-            <TableColumn text="Status" prefWidth="120" fx:id="statusColumn"/>
-            <TableColumn text="Submitted" prefWidth="150" fx:id="submittedColumn"/>
-        </columns>
-    </TableView>
-
+        <HBox spacing="15">
+            <Button text="View Details" onAction="#handleViewDetails" styleClass="primary-button"/>
+            <Button text="Submit Progress" onAction="#handleSubmitProgress" styleClass="success-button"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="secondary-button"/>
+        </HBox>
+    </VBox>
 </VBox>

@@ -26,6 +26,7 @@
                 <Button text="Dashboard" onAction="#showDashboard" styleClass="nav-button"/>
                 <Button text="Gallery" onAction="#showGallery" styleClass="nav-button"/>
                 <Button text="Actions" onAction="#showActions" styleClass="nav-button"/>
+                <Button text="Workers" onAction="#showWorkers" styleClass="nav-button"/>
                 <Button text="User Reports" onAction="#showUserReports" styleClass="nav-button"/>
 
                 <Region prefWidth="20"/>

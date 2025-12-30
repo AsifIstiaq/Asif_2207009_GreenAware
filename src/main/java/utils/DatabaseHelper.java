@@ -26,6 +26,39 @@ public class DatabaseHelper {
     private static void initializeDatabase(Connection conn) {
         try (Statement stmt = conn.createStatement()) {
 
+            // Workers table
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS workers (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    phone TEXT,
+                    email TEXT UNIQUE,
+                    username TEXT UNIQUE,
+                    password TEXT,
+                    specialization TEXT,
+                    status TEXT DEFAULT 'AVAILABLE',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """);
+
+            // Work Progress table
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS work_progress (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    action_id INTEGER NOT NULL,
+                    worker_id INTEGER NOT NULL,
+                    worker_name TEXT NOT NULL,
+                    worker_phone TEXT,
+                    description TEXT,
+                    photo_path TEXT,
+                    location TEXT,
+                    status TEXT DEFAULT 'PENDING',
+                    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (action_id) REFERENCES actions(id),
+                    FOREIGN KEY (worker_id) REFERENCES workers(id)
+                )
+            """);
+
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS actions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,7 +69,8 @@ public class DatabaseHelper {
                     status TEXT DEFAULT 'PENDING',
                     resolution_details TEXT,
                     completed_date TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    location TEXT
                 )
             """);
 
@@ -72,9 +106,17 @@ public class DatabaseHelper {
                     severity TEXT NOT NULL,
                     description TEXT,
                     image_path TEXT,
+                    final_photo_path TEXT,
                     status TEXT DEFAULT 'PENDING',
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (user_id) REFERENCES users(id)
+                )
+            """);
+
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS report_categories (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL UNIQUE
                 )
             """);
 

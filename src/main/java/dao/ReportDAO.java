@@ -77,6 +77,7 @@ public class ReportDAO {
                             rs.getString("severity"),
                             rs.getString("description"),
                             rs.getString("image_path"),
+                            rs.getString("final_photo_path"),
                             rs.getString("status"),
                             rs.getString("reporter_name"),
                             rs.getString("created_at")
@@ -111,6 +112,7 @@ public class ReportDAO {
                         rs.getString("severity"),
                         rs.getString("description"),
                         rs.getString("image_path"),
+                        rs.getString("final_photo_path"),
                         rs.getString("status"),
                         rs.getString("reporter_name"),
                         rs.getString("created_at")
@@ -172,5 +174,52 @@ public class ReportDAO {
             }
         }
         return 0;
+    }
+
+    public Report getReportById(int reportId) throws SQLException {
+        String query = """
+            SELECT r.*, u.full_name as reporter_name
+            FROM reports r
+            LEFT JOIN users u ON r.user_id = u.id
+            WHERE r.id = ?
+        """;
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, reportId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Report(
+                            rs.getInt("id"),
+                            rs.getInt("user_id"),
+                            rs.getString("category_name"),
+                            rs.getString("incident_type"),
+                            rs.getString("location"),
+                            rs.getString("date_reported"),
+                            rs.getString("severity"),
+                            rs.getString("description"),
+                            rs.getString("image_path"),
+                            rs.getString("final_photo_path"),
+                            rs.getString("status"),
+                            rs.getString("reporter_name"),
+                            rs.getString("created_at")
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+    public void updateFinalPhoto(int reportId, String finalPhotoPath) throws SQLException {
+        String query = "UPDATE reports SET final_photo_path = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseHelper.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, finalPhotoPath);
+            pstmt.setInt(2, reportId);
+            pstmt.executeUpdate();
+        }
     }
 }

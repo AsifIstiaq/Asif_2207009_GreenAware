@@ -3,6 +3,7 @@ package controllers;
 import java.time.LocalDate;
 
 import dao.ActionDAO;
+import dao.WorkerDAO;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,28 +14,35 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.Action;
+import models.Worker;
 
 public class ActionFormController {
 
-    @FXML private TextField workerNameField;
+//    @FXML private TextField workerNameField;
+    @FXML private ComboBox<Worker> workerCombo;
     @FXML private DatePicker deadlinePicker;
     @FXML private ComboBox<String> statusCombo;
+    @FXML private TextField locationField;
     @FXML private TextArea actionNoteArea;
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
 
     private ActionDAO actionDAO;
+    private WorkerDAO workerDAO;
     private Action currentAction;
     private boolean saved = false;
 
     @FXML
     public void initialize() {
         actionDAO = new ActionDAO();
+        workerDAO = new WorkerDAO();
 
         statusCombo.setItems(FXCollections.observableArrayList(
                 "PENDING", "IN_PROGRESS", "COMPLETED"
         ));
         statusCombo.setValue("PENDING");
+
+        loadWorkers();
 
         saveButton.setOnAction(e -> saveAction());
         cancelButton.setOnAction(e -> cancel());
@@ -42,22 +50,75 @@ public class ActionFormController {
         deadlinePicker.setValue(LocalDate.now().plusDays(1));
     }
 
+    private void loadWorkers() {
+        try {
+            workerCombo.setItems(FXCollections.observableArrayList(workerDAO.getAllWorkers()));
+
+            // Set custom display for workers
+            workerCombo.setButtonCell(new javafx.scene.control.ListCell<Worker>() {
+                @Override
+                protected void updateItem(Worker worker, boolean empty) {
+                    super.updateItem(worker, empty);
+                    if (empty || worker == null) {
+                        setText(null);
+                    } else {
+                        setText(worker.getName() + " - " + worker.getSpecialization());
+                    }
+                }
+            });
+
+            workerCombo.setCellFactory(lv -> new javafx.scene.control.ListCell<Worker>() {
+                @Override
+                protected void updateItem(Worker worker, boolean empty) {
+                    super.updateItem(worker, empty);
+                    if (empty || worker == null) {
+                        setText(null);
+                    } else {
+                        setText(worker.getName() + " - " + worker.getSpecialization());
+                    }
+                }
+            });
+        } catch (Exception e) {
+            showError("Failed to load workers: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void setAction(Action action) {
         this.currentAction = action;
 
         if (action != null) {
             deadlinePicker.setValue(LocalDate.parse(action.getDeadline()));
+            locationField.setText(action.getLocation());
             statusCombo.setValue(action.getStatus());
             actionNoteArea.setText(action.getActionNote());
-            workerNameField.setText(action.getWorkerName() != null ? action.getWorkerName() : "");
+            //workerNameField.setText(action.getWorkerName() != null ? action.getWorkerName() : "");
+            if (action.getWorkerId() > 0) {
+                workerCombo.getItems().stream()
+                        .filter(w -> w.getId() == action.getWorkerId())
+                        .findFirst()
+                        .ifPresent(workerCombo::setValue);
+            }
         }
     }
 
     private void saveAction() {
-        if (workerNameField.getText().trim().isEmpty()) {
-            showError("Worker name is required");
+//        if (workerNameField.getText().trim().isEmpty()) {
+//            showError("Worker name is required");
+//            return;
+//        }
+
+        Worker selectedWorker = workerCombo.getValue();
+        if (selectedWorker == null) {
+            showError("Please select a worker");
             return;
         }
+
+        if (locationField.getText().trim().isEmpty()) {
+            showError("Location is required");
+            return;
+        }
+
         if (deadlinePicker.getValue() == null) {
             showError("Deadline is required");
             return;
@@ -72,23 +133,26 @@ public class ActionFormController {
         }
 
         try {
-            String workerName = workerNameField.getText().trim();
+            //String workerName = workerNameField.getText().trim();
 
             if (currentAction == null) {
                 Action newAction = new Action(
                         0,
-                        0,
+                        selectedWorker.getId(),
                         actionNoteArea.getText().trim(),
                         deadlinePicker.getValue().toString(),
                         statusCombo.getValue(),
                         "",
                         null,
                         null,
-                        workerName
+                        selectedWorker.getName(),
+                        locationField.getText().trim()
                 );
                 actionDAO.insertAction(newAction);
             } else {
-                currentAction.setWorkerName(workerName);
+                currentAction.setWorkerId(selectedWorker.getId());
+                currentAction.setWorkerName(selectedWorker.getName());
+                currentAction.setLocation(locationField.getText().trim());
                 currentAction.setActionNote(actionNoteArea.getText().trim());
                 currentAction.setDeadline(deadlinePicker.getValue().toString());
                 currentAction.setStatus(statusCombo.getValue());

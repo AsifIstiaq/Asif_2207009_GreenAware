@@ -24,15 +24,18 @@
         </padding>
 
         <Label text="Assigned Worker:*" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="form-label"/>
-        <TextField fx:id="workerNameField" promptText="Enter worker name" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300"/>
+        <ComboBox fx:id="workerCombo" promptText="Select worker" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="300"/>
 
-        <Label text="Deadline:*" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
-        <DatePicker fx:id="deadlinePicker" promptText="Select deadline" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
+        <Label text="Location:*" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-label"/>
+        <TextField fx:id="locationField" promptText="Enter location" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="300"/>
 
-        <Label text="Status:*" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
-        <ComboBox fx:id="statusCombo" promptText="Select status" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
+        <Label text="Deadline:*" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-label"/>
+        <DatePicker fx:id="deadlinePicker" promptText="Select deadline" GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="300"/>
 
-        <Label text="Action Note:*" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+        <Label text="Status:*" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="form-label"/>
+        <ComboBox fx:id="statusCombo" promptText="Select status" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="300"/>
+
+        <Label text="Action Note:*" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="form-label"/>
         <TextArea fx:id="actionNoteArea" promptText="Enter action details..."
                   GridPane.rowIndex="4" GridPane.columnIndex="1" prefRowCount="5" wrapText="true" prefWidth="300"/>
 

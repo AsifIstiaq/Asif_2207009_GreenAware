@@ -46,7 +46,8 @@
         <columns>
             <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
             <TableColumn text="Worker" prefWidth="130" fx:id="workerColumn"/>
-            <TableColumn text="Action Note" prefWidth="250" fx:id="actionNoteColumn"/>
+            <TableColumn text="Location" prefWidth="150" fx:id="locationColumn"/>
+            <TableColumn text="Action Note" prefWidth="200" fx:id="actionNoteColumn"/>
             <TableColumn text="Deadline" prefWidth="100" fx:id="deadlineColumn"/>
             <TableColumn text="Status" prefWidth="100" fx:id="statusColumn"/>
             <TableColumn text="Completed Date" prefWidth="120" fx:id="completedDateColumn"/>

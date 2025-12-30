@@ -20,6 +20,7 @@ public class ActionController {
     @FXML private TableView<Action> actionsTable;
     @FXML private TableColumn<Action, Integer> idColumn;
     @FXML private TableColumn<Action, String> workerColumn;
+    @FXML private TableColumn<Action, String> locationColumn;
     @FXML private TableColumn<Action, String> actionNoteColumn;
     @FXML private TableColumn<Action, String> deadlineColumn;
     @FXML private TableColumn<Action, String> statusColumn;
@@ -45,6 +46,10 @@ public class ActionController {
 
             workerColumn.setCellValueFactory(
                     cell -> cell.getValue().workerNameProperty()
+            );
+
+            locationColumn.setCellValueFactory(
+                    cell -> cell.getValue().locationProperty()
             );
 
             actionNoteColumn.setCellValueFactory(

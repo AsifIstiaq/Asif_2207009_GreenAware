@@ -3,7 +3,7 @@ package controllers;
 import java.io.File;
 import java.time.LocalDate;
 
-import dao.ReportDAO;
+import dao.ReportDAO_Firebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +31,7 @@ public class UserReportController {
     @FXML private Label statusLabel;
 
     private User currentUser;
-    private final ReportDAO reportDAO = new ReportDAO();
+    private final ReportDAO_Firebase reportDAO = new ReportDAO_Firebase();
 
     @FXML
     public void initialize() {

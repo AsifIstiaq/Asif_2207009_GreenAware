@@ -2,8 +2,8 @@ package controllers;
 
 import java.time.LocalDate;
 
-import dao.ActionDAO;
-import dao.WorkerDAO;
+import dao.ActionDAO_Firebase;
+import dao.WorkerDAO_Firebase;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,7 +18,6 @@ import models.Worker;
 
 public class ActionFormController {
 
-//    @FXML private TextField workerNameField;
     @FXML private ComboBox<Worker> workerCombo;
     @FXML private DatePicker deadlinePicker;
     @FXML private ComboBox<String> statusCombo;
@@ -27,15 +26,15 @@ public class ActionFormController {
     @FXML private Button saveButton;
     @FXML private Button cancelButton;
 
-    private ActionDAO actionDAO;
-    private WorkerDAO workerDAO;
+    private ActionDAO_Firebase actionDAO;
+    private WorkerDAO_Firebase workerDAO;
     private Action currentAction;
     private boolean saved = false;
 
     @FXML
     public void initialize() {
-        actionDAO = new ActionDAO();
-        workerDAO = new WorkerDAO();
+        actionDAO = new ActionDAO_Firebase();
+        workerDAO = new WorkerDAO_Firebase();
 
         statusCombo.setItems(FXCollections.observableArrayList(
                 "PENDING", "IN_PROGRESS", "COMPLETED"
@@ -54,7 +53,6 @@ public class ActionFormController {
         try {
             workerCombo.setItems(FXCollections.observableArrayList(workerDAO.getAllWorkers()));
 
-            // Set custom display for workers
             workerCombo.setButtonCell(new javafx.scene.control.ListCell<Worker>() {
                 @Override
                 protected void updateItem(Worker worker, boolean empty) {
@@ -103,10 +101,6 @@ public class ActionFormController {
     }
 
     private void saveAction() {
-//        if (workerNameField.getText().trim().isEmpty()) {
-//            showError("Worker name is required");
-//            return;
-//        }
 
         Worker selectedWorker = workerCombo.getValue();
         if (selectedWorker == null) {
@@ -133,7 +127,6 @@ public class ActionFormController {
         }
 
         try {
-            //String workerName = workerNameField.getText().trim();
 
             if (currentAction == null) {
                 Action newAction = new Action(
@@ -146,7 +139,8 @@ public class ActionFormController {
                         null,
                         null,
                         selectedWorker.getName(),
-                        locationField.getText().trim()
+                        locationField.getText().trim(),
+                        null
                 );
                 actionDAO.insertAction(newAction);
             } else {

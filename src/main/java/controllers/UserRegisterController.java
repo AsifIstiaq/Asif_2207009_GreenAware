@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.UserDAO;
+import dao.UserDAO_Firebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +20,7 @@ public class UserRegisterController {
     @FXML private TextField phoneField;
     @FXML private Label errorLabel;
 
-    private final UserDAO userDAO = new UserDAO();
+    private final UserDAO_Firebase userDAO = new UserDAO_Firebase();
 
     @FXML
     public void handleRegister() {

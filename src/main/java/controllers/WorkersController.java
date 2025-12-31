@@ -3,8 +3,8 @@ package controllers;
 import java.io.File;
 import java.util.Optional;
 
-import dao.WorkProgressDAO;
-import dao.WorkerDAO;
+import dao.WorkProgressDAO_Firebase;
+import dao.WorkerDAO_Firebase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,8 +42,8 @@ public class WorkersController {
     @FXML private TableColumn<WorkProgress, String> progressStatusColumn;
     @FXML private TableColumn<WorkProgress, String> progressDateColumn;
 
-    private WorkerDAO workerDAO = new WorkerDAO();
-    private WorkProgressDAO progressDAO = new WorkProgressDAO();
+    private WorkerDAO_Firebase workerDAO = new WorkerDAO_Firebase();
+    private WorkProgressDAO_Firebase progressDAO = new WorkProgressDAO_Firebase();
     private ObservableList<Worker> workers = FXCollections.observableArrayList();
     private ObservableList<WorkProgress> progressReports = FXCollections.observableArrayList();
 

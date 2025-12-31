@@ -3,7 +3,7 @@ package controllers;
 import java.util.Optional;
 import java.util.concurrent.Future;
 
-import dao.ActionDAO;
+import dao.ActionDAO_Firebase;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,12 +28,12 @@ public class ActionController {
     @FXML private Label statusLabel;
 
     private DataLoadingService dataService;
-    private ActionDAO actionDAO;
+    private ActionDAO_Firebase actionDAO;
 
     @FXML
     public void initialize() {
         dataService = new DataLoadingService();
-        actionDAO = new ActionDAO();
+        actionDAO = new ActionDAO_Firebase();
 
         setupTable();
         refreshActions();

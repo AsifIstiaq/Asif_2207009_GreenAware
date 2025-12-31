@@ -13,14 +13,15 @@ public class Action {
     private final StringProperty createdAt;
     private final StringProperty workerName;
     private final StringProperty location;
+    private final StringProperty firebaseId;
 
     public Action() {
-        this(0, 0, "", "", "PENDING", "", "", "", "","");
+        this(0, 0, "", "", "PENDING", "", "", "", "","",null);
     }
 
     public Action(int id, int workerId, String actionNote, String deadline,
                   String status, String resolutionDetails, String completedDate, String createdAt,
-                  String workerName, String location) {
+                  String workerName, String location, String firebaseId) {
         this.id = new SimpleIntegerProperty(id);
         this.workerId = new SimpleIntegerProperty(workerId);
         this.actionNote = new SimpleStringProperty(actionNote);
@@ -31,6 +32,7 @@ public class Action {
         this.createdAt = new SimpleStringProperty(createdAt);
         this.workerName = new SimpleStringProperty(workerName);
         this.location = new SimpleStringProperty(location);
+        this.firebaseId = new SimpleStringProperty(firebaseId);
     }
 
     public int getId() { return id.get(); }

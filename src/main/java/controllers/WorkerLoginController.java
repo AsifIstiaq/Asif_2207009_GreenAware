@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.WorkerDAO;
+import dao.WorkerDAO_Firebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ public class WorkerLoginController {
     @FXML private PasswordField passwordField;
     @FXML private Label messageLabel;
 
-    private WorkerDAO workerDAO = new WorkerDAO();
+    private WorkerDAO_Firebase workerDAO = new WorkerDAO_Firebase();
 
     @FXML
     public void handleLogin() {

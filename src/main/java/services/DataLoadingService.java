@@ -5,21 +5,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import dao.ActionDAO;
-import dao.ReportDAO;
+import dao.ActionDAO_Firebase;
+import dao.ReportDAO_Firebase;
 import javafx.collections.ObservableList;
 import models.Action;
 
 public class DataLoadingService {
     private final ExecutorService executorService;
 
-    private final ActionDAO actionDAO;
-    private final ReportDAO reportDAO;
+    private final ActionDAO_Firebase actionDAO;
+    private final ReportDAO_Firebase reportDAO;
 
     public DataLoadingService() {
         this.executorService = Executors.newFixedThreadPool(4);
-        this.actionDAO = new ActionDAO();
-        this.reportDAO = new ReportDAO();
+        this.actionDAO = new ActionDAO_Firebase();
+        this.reportDAO = new ReportDAO_Firebase();
     }
 
     public Future<ObservableList<Action>> loadActions() {

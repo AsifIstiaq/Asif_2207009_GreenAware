@@ -2,7 +2,7 @@ package controllers;
 
 import java.io.File;
 
-import dao.GalleryDAO;
+import dao.GalleryDAO_Firebase;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +21,7 @@ public class GalleryController {
     @FXML private Label statusLabel;
     @FXML private VBox galleryContainer;
 
-    private final GalleryDAO galleryDAO = new GalleryDAO();
+    private final GalleryDAO_Firebase galleryDAO = new GalleryDAO_Firebase();
 
     @FXML
     public void initialize() {

@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.ReportDAO;
+import dao.ReportDAO_Firebase;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class UserDashboardController {
     @FXML private TableColumn<Report, String> submittedColumn;
 
     private User currentUser;
-    private final ReportDAO reportDAO = new ReportDAO();
+    private final ReportDAO_Firebase reportDAO = new ReportDAO_Firebase();
 
     @FXML
     public void initialize() {

@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.WorkerDAO;
+import dao.WorkerDAO_Firebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +22,7 @@ public class WorkerRegisterController {
     @FXML private ComboBox<String> specializationCombo;
     @FXML private Label messageLabel;
 
-    private WorkerDAO workerDAO = new WorkerDAO();
+    private WorkerDAO_Firebase workerDAO = new WorkerDAO_Firebase();
 
     @FXML
     public void handleRegister() {
@@ -85,7 +85,7 @@ public class WorkerRegisterController {
             worker.setEmail(email);
             worker.setUsername(username);
             worker.setPhone(phone);
-            worker.setPassword(password); // In production, hash this password
+            worker.setPassword(password);
             worker.setSpecialization(specialization);
             worker.setStatus("AVAILABLE");
 

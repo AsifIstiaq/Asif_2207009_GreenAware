@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.ReportDAO;
+import dao.ReportDAO_Firebase;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +28,7 @@ public class UserReportsController {
     @FXML private TableColumn<Report, String> statusColumn;
     @FXML private TableColumn<Report, String> submittedColumn;
 
-    private final ReportDAO reportDAO = new ReportDAO();
+    private final ReportDAO_Firebase reportDAO = new ReportDAO_Firebase();
     private ObservableList<Report> allReports;
 
     @FXML
@@ -126,14 +126,12 @@ public class UserReportsController {
 
     @FXML
     public void handleMarkResolved() {
-//        updateSelectedReportStatus("RESOLVED");
         Report selectedReport = reportsTable.getSelectionModel().getSelectedItem();
         if (selectedReport == null) {
             showWarning("Please select a report first");
             return;
         }
 
-        // Open dialog to select final photo from work progress
         showSelectFinalPhotoDialog(selectedReport);
     }
 
@@ -186,7 +184,6 @@ public class UserReportsController {
                 new javafx.stage.FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
-        // Set initial directory to progress photos if exists
         java.io.File progressPhotosDir = new java.io.File("db/progress_photos");
         if (progressPhotosDir.exists()) {
             fileChooser.setInitialDirectory(progressPhotosDir);
@@ -196,9 +193,7 @@ public class UserReportsController {
         if (selectedFile != null) {
             new Thread(() -> {
                 try {
-                    // Update final photo path
                     reportDAO.updateFinalPhoto(report.getId(), selectedFile.getAbsolutePath());
-                    // Update status to resolved
                     reportDAO.updateReportStatus(report.getId(), "RESOLVED");
 
                     Platform.runLater(() -> {
@@ -222,7 +217,6 @@ public class UserReportsController {
         content.setPadding(new javafx.geometry.Insets(20));
         content.setAlignment(javafx.geometry.Pos.TOP_LEFT);
 
-        // Report information
         javafx.scene.layout.GridPane grid = new javafx.scene.layout.GridPane();
         grid.setHgap(15);
         grid.setVgap(10);
@@ -248,7 +242,6 @@ public class UserReportsController {
 
         content.getChildren().add(grid);
 
-        // Photos section
         if (report.getImagePath() != null || report.getFinalPhotoPath() != null) {
             content.getChildren().add(new javafx.scene.control.Separator());
             Label photosLabel = new Label("Photos:");
@@ -258,7 +251,6 @@ public class UserReportsController {
             javafx.scene.layout.HBox photosBox = new javafx.scene.layout.HBox(20);
             photosBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-            // Before photo
             if (report.getImagePath() != null && !report.getImagePath().isEmpty()) {
                 javafx.scene.layout.VBox beforeBox = new javafx.scene.layout.VBox(10);
                 beforeBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -282,7 +274,6 @@ public class UserReportsController {
                 }
             }
 
-            // After photo (if resolved)
             if (report.getFinalPhotoPath() != null && !report.getFinalPhotoPath().isEmpty()) {
                 javafx.scene.layout.VBox afterBox = new javafx.scene.layout.VBox(10);
                 afterBox.setAlignment(javafx.geometry.Pos.CENTER);

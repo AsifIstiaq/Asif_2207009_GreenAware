@@ -9,17 +9,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import dao.ReportDAO;
+import dao.ReportDAO_Firebase;
 import javafx.collections.ObservableList;
 import models.Report;
 
 public class AnalyticsService {
     private final ExecutorService executorService;
-    private final ReportDAO reportDAO;
+    private final ReportDAO_Firebase reportDAO;
 
     public AnalyticsService() {
         this.executorService = Executors.newFixedThreadPool(2);
-        this.reportDAO = new ReportDAO();
+        this.reportDAO = new ReportDAO_Firebase();
     }
 
     public Future<Map<String, Integer>> calculateCategoryDistribution() {

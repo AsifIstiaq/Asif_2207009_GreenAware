@@ -19,10 +19,11 @@ public class Report {
     private final StringProperty reporterName;
     private final StringProperty createdAt;
     private final StringProperty finalPhotoPath;
+    private final StringProperty firebaseId;
 
     public Report(int id, int userId, String categoryName, String incidentType, String location, String dateReported,
                   String severity, String description, String imagePath, String finalPhotoPath, String status,
-                  String reporterName, String createdAt) {
+                  String reporterName, String createdAt, String firebaseId) {
         this.id = new SimpleIntegerProperty(id);
         this.userId = new SimpleIntegerProperty(userId);
         this.categoryName = new SimpleStringProperty(categoryName);
@@ -36,6 +37,7 @@ public class Report {
         this.status = new SimpleStringProperty(status);
         this.reporterName = new SimpleStringProperty(reporterName);
         this.createdAt = new SimpleStringProperty(createdAt);
+        this.firebaseId = new SimpleStringProperty(firebaseId);
     }
 
     public int getId() { return id.get(); }

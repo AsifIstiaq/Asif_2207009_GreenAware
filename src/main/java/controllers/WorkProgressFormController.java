@@ -6,13 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-import dao.ActionDAO;
-import dao.WorkProgressDAO;
+import dao.ActionDAO_Firebase;
+import dao.WorkProgressDAO_Firebase;
+import dao.WorkerDAO_Firebase;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -34,8 +32,9 @@ public class WorkProgressFormController {
     private Action currentAction;
     private Worker currentWorker;
     private String selectedPhotoPath;
-    private ActionDAO actionDAO = new ActionDAO();
-    private WorkProgressDAO progressDAO = new WorkProgressDAO();
+    private ActionDAO_Firebase actionDAO = new ActionDAO_Firebase();
+    private WorkProgressDAO_Firebase progressDAO = new WorkProgressDAO_Firebase();
+    private WorkerDAO_Firebase workerDAO = new WorkerDAO_Firebase();
 
     public void setActionAndWorker(Action action, Worker worker) {
         this.currentAction = action;
@@ -124,7 +123,21 @@ public class WorkProgressFormController {
             if (status.equals("COMPLETED")) {
                 currentAction.setCompletedDate(java.time.LocalDate.now().toString());
             }
-            actionDAO.updateAction(currentAction);
+
+            boolean success = actionDAO.updateAction(currentAction);
+
+            if (!success) {
+                showMessage("Error! Action not found in database", "red");
+            }
+
+            String workerStatus = "BUSY";
+            if (status.equals("COMPLETED")) {
+                workerStatus = "AVAILABLE";
+            } else if (status.equals("PENDING") || status.equals("IN_PROGRESS")) {
+                workerStatus = "BUSY";
+            }
+
+            workerDAO.updateWorkerStatus(currentWorker.getId(), workerStatus);
 
             showMessage("Progress submitted successfully!", "green");
 

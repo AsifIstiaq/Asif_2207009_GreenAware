@@ -1,6 +1,6 @@
 package controllers;
 
-import dao.ActionDAO;
+import dao.ActionDAO_Firebase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class WorkerDashboardController {
     @FXML private TableColumn<Action, String> statusColumn;
 
     private Worker currentWorker;
-    private ActionDAO actionDAO = new ActionDAO();
+    private ActionDAO_Firebase actionDAO = new ActionDAO_Firebase();
     private ObservableList<Action> assignments = FXCollections.observableArrayList();
 
     @FXML

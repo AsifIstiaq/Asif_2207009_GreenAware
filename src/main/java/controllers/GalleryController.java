@@ -79,21 +79,36 @@ public class GalleryController {
         ImageView imageView = new ImageView();
         imageView.getStyleClass().add("gallery-image");
 
-       if (item.getImagePath() != null) {
-           File file = new File(item.getImagePath());
-           if (file.exists()) {
-               Image image = new Image(file.toURI().toString());
-               imageView = new ImageView(image);
+        if (item.getImagePath() != null && !item.getImagePath().isEmpty()) {
+            try {
+                Image image;
+                if (item.getImagePath().startsWith("http")) {
+                    image = new Image(item.getImagePath(), true);
+                    imageView = new ImageView(image);
+                    imageView.setFitWidth(600);
+                    imageView.setFitHeight(300);
+                    imageView.setPreserveRatio(true);
+                    imageView.setSmooth(true);
+                    imageView.setCache(true);
+                } else {
+                    File file = new File(item.getImagePath());
+                    if (file.exists()) {
+                        image = new Image(file.toURI().toString());
+                        imageView = new ImageView(image);
+                        imageView.setFitWidth(600);
+                        imageView.setFitHeight(300);
+                        imageView.setPreserveRatio(true);
+                        imageView.setSmooth(true);
+                        imageView.setCache(true);
+                    } else {
+                        imageBox.getChildren().add(createInfoLabel("Image not found"));
+                    }
+                }
 
-               imageView.setFitWidth(600);
-               imageView.setFitHeight(300);
-               imageView.setPreserveRatio(true);
-               imageView.setSmooth(true);
-               imageView.setCache(true);
-
-               imageBox.getChildren().add(imageView);
-            } else {
-                imageBox.getChildren().add(createInfoLabel("Image not found"));
+                imageBox.getChildren().add(imageView);
+            } catch (Exception e) {
+                imageBox.getChildren().add(createInfoLabel("Failed to load image"));
+                e.printStackTrace();
             }
         } else {
             imageBox.getChildren().add(createInfoLabel("No image available"));

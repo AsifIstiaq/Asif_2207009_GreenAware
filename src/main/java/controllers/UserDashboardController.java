@@ -201,7 +201,6 @@ public class UserDashboardController {
 
         content.getChildren().add(grid);
 
-        // Photos section
         if (report.getImagePath() != null || report.getFinalPhotoPath() != null) {
             content.getChildren().add(new javafx.scene.control.Separator());
             Label photosLabel = new Label("Photos:");
@@ -211,7 +210,6 @@ public class UserDashboardController {
             javafx.scene.layout.HBox photosBox = new javafx.scene.layout.HBox(20);
             photosBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-            // Before photo
             if (report.getImagePath() != null && !report.getImagePath().isEmpty()) {
                 javafx.scene.layout.VBox beforeBox = new javafx.scene.layout.VBox(10);
                 beforeBox.setAlignment(javafx.geometry.Pos.CENTER);
@@ -235,7 +233,6 @@ public class UserDashboardController {
                 }
             }
 
-            // After photo (if resolved)
             if (report.getFinalPhotoPath() != null && !report.getFinalPhotoPath().isEmpty()) {
                 javafx.scene.layout.VBox afterBox = new javafx.scene.layout.VBox(10);
                 afterBox.setAlignment(javafx.geometry.Pos.CENTER);

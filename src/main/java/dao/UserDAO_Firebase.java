@@ -153,10 +153,10 @@ public class UserDAO_Firebase {
 
     private User documentToUser(DocumentSnapshot document) {
         String firebaseId = document.getId();
-        int userId = Math.abs(firebaseId.hashCode());
+//        int userId = Math.abs(firebaseId.hashCode());
 
         return new User(
-                userId,
+                firebaseId,
                 document.getString("full_name"),
                 document.getString("email"),
                 document.getString("username"),

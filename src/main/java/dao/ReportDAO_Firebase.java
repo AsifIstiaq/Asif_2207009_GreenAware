@@ -35,14 +35,28 @@ public class ReportDAO_Firebase {
         this.categoriesCollection = db.collection("report_categories");
     }
 
-    public void addReport(int userId, String categoryName, String incidentType, String location, String dateReported,
-                          String severity, String description, String imagePath) throws ExecutionException, InterruptedException {
+    public void addReport(String userId, String categoryName, String incidentType, String location,
+                          String dateReported, String severity, String description, String imagePath)
+            throws ExecutionException, InterruptedException {
+
+        String reporterName = "Unknown";
+        if (userId != null && !userId.isEmpty()) {
+            DocumentSnapshot userDoc = usersCollection.document(userId).get().get();
+            if (userDoc.exists()) {
+                String name = userDoc.getString("full_name");
+                if (name != null && !name.isEmpty()) {
+                    reporterName = name;
+                }
+            }
+        }
+
         DocumentReference docRef = reportsCollection.document();
         String reportId = docRef.getId();
 
         Map<String, Object> reportData = new HashMap<>();
         reportData.put("id", reportId);
-        reportData.put("user_id", String.valueOf(userId));
+        reportData.put("user_id", userId);
+        reportData.put("reporter_name", reporterName);
         reportData.put("category_name", categoryName);
         reportData.put("incident_type", incidentType);
         reportData.put("location", location);
@@ -54,9 +68,9 @@ public class ReportDAO_Firebase {
         reportData.put("status", "PENDING");
         reportData.put("created_at", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
-        ApiFuture<WriteResult> future = docRef.set(reportData);
-        future.get();
+        docRef.set(reportData).get();
     }
+
 
     public ObservableList<String> getAllCategories() throws ExecutionException, InterruptedException {
         ObservableList<String> categories = FXCollections.observableArrayList();
@@ -77,11 +91,11 @@ public class ReportDAO_Firebase {
         return categories;
     }
 
-    public ObservableList<Report> getReportsByUserId(int userId) throws ExecutionException, InterruptedException {
+    public ObservableList<Report> getReportsByUserId(String userId) throws ExecutionException, InterruptedException {
         ObservableList<Report> reports = FXCollections.observableArrayList();
 
         ApiFuture<QuerySnapshot> future = reportsCollection
-                .whereEqualTo("user_id", String.valueOf(userId))
+                .whereEqualTo("user_id", userId)
                 .orderBy("created_at", Query.Direction.DESCENDING)
                 .get();
 
@@ -238,64 +252,49 @@ public class ReportDAO_Firebase {
         throw new IllegalArgumentException("Report not found with ID: " + reportId);
     }
 
-    private Report documentToReport(DocumentSnapshot document) {
-        try {
-            String id = document.getString("id");
-            String userId = document.getString("user_id");
-            String categoryName = document.getString("category_name");
-            String incidentType = document.getString("incident_type");
-            String location = document.getString("location");
-            String dateReported = document.getString("date_reported");
-            String severity = document.getString("severity");
-            String description = document.getString("description");
-            String imagePath = document.getString("image_path");
-            String finalPhotoPath = document.getString("final_photo_path");
-            String status = document.getString("status");
-            String createdAt = document.getString("created_at");
+private Report documentToReport(DocumentSnapshot document) {
+    try {
+        String id = document.getString("id");
+        String userId = document.getString("user_id");
+        String categoryName = document.getString("category_name");
+        String incidentType = document.getString("incident_type");
+        String location = document.getString("location");
+        String dateReported = document.getString("date_reported");
+        String severity = document.getString("severity");
+        String description = document.getString("description");
+        String imagePath = document.getString("image_path");
+        String finalPhotoPath = document.getString("final_photo_path");
+        String status = document.getString("status");
+        String createdAt = document.getString("created_at");
 
-            String reporterName = "Unknown";
-            if (userId != null && !userId.isEmpty()) {
-                try {
-                    ApiFuture<QuerySnapshot> userQueryFuture = usersCollection
-                            .whereEqualTo("id", userId)
-                            .limit(1)
-                            .get();
-                    QuerySnapshot userSnapshot = userQueryFuture.get();
-                    if (!userSnapshot.isEmpty()) {
-                        DocumentSnapshot userDoc = userSnapshot.getDocuments().get(0);
-                        String name = userDoc.getString("full_name");
-                        if (name != null && !name.isEmpty()) {
-                            reporterName = name;
-                        }
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error fetching user for report " + id + ": " + e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-
-            int reportId = id != null ? id.hashCode() : 0;
-            int userIdInt = userId != null ? userId.hashCode() : 0;
-
-            return new Report(
-                    reportId,
-                    userIdInt,
-                    categoryName,
-                    incidentType,
-                    location,
-                    dateReported,
-                    severity,
-                    description,
-                    imagePath,
-                    finalPhotoPath,
-                    status,
-                    reporterName,
-                    createdAt,
-                    id
-            );
-        } catch (Exception e) {
-            System.err.println("Error converting document to Report: " + e.getMessage());
-            return null;
+        String reporterName = document.getString("reporter_name");
+        if (reporterName == null || reporterName.isEmpty()) {
+            reporterName = "Unknown";
         }
+
+        int reportId = id != null ? id.hashCode() : 0;
+        int userIdInt = userId != null ? userId.hashCode() : 0;
+
+        return new Report(
+                reportId,
+                userIdInt,
+                categoryName,
+                incidentType,
+                location,
+                dateReported,
+                severity,
+                description,
+                imagePath,
+                finalPhotoPath,
+                status,
+                reporterName,
+                createdAt,
+                id
+        );
+    } catch (Exception e) {
+        System.err.println("Error converting document to Report: " + e.getMessage());
+        return null;
     }
+}
+
 }

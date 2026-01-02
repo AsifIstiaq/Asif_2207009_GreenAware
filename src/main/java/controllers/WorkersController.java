@@ -199,19 +199,17 @@ public class WorkersController {
         content.getChildren().add(grid);
 
         if (selected.getPhotoPath() != null && !selected.getPhotoPath().isEmpty()) {
-            File photoFile = new File(selected.getPhotoPath());
-            if (photoFile.exists()) {
+            try {
                 ImageView imageView = new ImageView();
-                try {
-                    Image image = new Image(photoFile.toURI().toString());
-                    imageView.setImage(image);
-                    imageView.setFitWidth(400);
-                    imageView.setPreserveRatio(true);
-                    content.getChildren().add(new Label("Photo:"));
-                    content.getChildren().add(imageView);
-                } catch (Exception e) {
-                    content.getChildren().add(new Label("Failed to load photo"));
-                }
+                Image image = new Image(selected.getPhotoPath(), true); // true = load in background
+                imageView.setImage(image);
+                imageView.setFitWidth(400);
+                imageView.setPreserveRatio(true);
+
+                content.getChildren().add(new Label("Photo:"));
+                content.getChildren().add(imageView);
+            } catch (Exception e) {
+                content.getChildren().add(new Label("Failed to load photo"));
             }
         }
 

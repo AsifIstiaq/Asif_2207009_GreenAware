@@ -175,7 +175,9 @@ public class WorkerDAO_Firebase {
             String status = document.getString("status");
             String createdAt = document.getString("created_at");
 
-            int workerId = id.hashCode();
+            if(id == null) return null;
+
+            int workerId = stringHashCode(id);
 
             return new Worker(
                     workerId,
@@ -192,5 +194,14 @@ public class WorkerDAO_Firebase {
             System.err.println("Error converting document to Worker: " + e.getMessage());
             return null;
         }
+    }
+
+    public static int stringHashCode(String s) {
+        int h = 0;
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            h = 31 * h + s.charAt(i);
+        }
+        return h;
     }
 }

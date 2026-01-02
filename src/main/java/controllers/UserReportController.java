@@ -45,7 +45,6 @@ public class UserReportController {
         }
 
         try {
-//            categoryCombo.setItems(reportDAO.getAllCategories());
             categoryCombo.setItems(javafx.collections.FXCollections.observableArrayList(
                     "Air pollution", "Noise pollution", "Water pollution"
             ));

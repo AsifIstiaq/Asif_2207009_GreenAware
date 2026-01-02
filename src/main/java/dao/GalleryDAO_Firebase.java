@@ -42,18 +42,10 @@ public class GalleryDAO_Firebase {
                 String location = reportDoc.getString("location");
                 String dateReported = reportDoc.getString("date_reported");
                 String categoryName = reportDoc.getString("category_name");
-                String userId = reportDoc.getString("user_id");
 
-                String reporterName = "Unknown";
-                if (userId != null && !userId.isEmpty()) {
-                    try {
-                        DocumentSnapshot userDoc = usersCollection.document(userId).get().get();
-                        if (userDoc.exists()) {
-                            reporterName = userDoc.getString("name");
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error fetching user for report " + reportId + ": " + e.getMessage());
-                    }
+                String reporterName = reportDoc.getString("reporter_name");
+                if (reporterName == null || reporterName.isEmpty()) {
+                    reporterName = "Unknown";
                 }
 
                 int reportIdInt = reportId != null ? reportId.hashCode() : 0;
@@ -71,6 +63,7 @@ public class GalleryDAO_Firebase {
 
         return galleryItems;
     }
+
 
     public int getImageCount() throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = reportsCollection.get();

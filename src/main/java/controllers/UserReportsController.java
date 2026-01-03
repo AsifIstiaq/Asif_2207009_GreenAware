@@ -10,6 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import models.Report;
+import okhttp3.*;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class UserReportsController {
 
@@ -30,6 +36,8 @@ public class UserReportsController {
 
     private final ReportDAO_Firebase reportDAO = new ReportDAO_Firebase();
     private ObservableList<Report> allReports;
+    private static final String CLOUD_NAME = "dabmwyr02";
+    private static final String UPLOAD_PRESET = "mobile_upload";
 
     @FXML
     public void initialize() {
@@ -178,35 +186,96 @@ public class UserReportsController {
     }
 
     private void showSelectFinalPhotoDialog(Report report) {
+
         javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
         fileChooser.setTitle("Select Completed Work Photo");
         fileChooser.getExtensionFilters().addAll(
-                new javafx.stage.FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new javafx.stage.FileChooser.ExtensionFilter(
+                        "Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
-        java.io.File progressPhotosDir = new java.io.File("db/progress_photos");
+        File progressPhotosDir = new File("db/progress_photos");
         if (progressPhotosDir.exists()) {
             fileChooser.setInitialDirectory(progressPhotosDir);
         }
 
-        java.io.File selectedFile = fileChooser.showOpenDialog(reportsTable.getScene().getWindow());
-        if (selectedFile != null) {
-            new Thread(() -> {
-                try {
-                    reportDAO.updateFinalPhoto(report.getId(), selectedFile.getAbsolutePath());
-                    reportDAO.updateReportStatus(report.getId(), "RESOLVED");
+        File selectedFile = fileChooser.showOpenDialog(
+                reportsTable.getScene().getWindow()
+        );
 
-                    Platform.runLater(() -> {
-                        showSuccess("Report marked as resolved with completion photo!");
-                        loadDashboardData();
-                    });
-                } catch (Exception e) {
-                    Platform.runLater(() -> showError("Error updating report: " + e.getMessage()));
-                    e.printStackTrace();
+        if (selectedFile == null) return;
+
+        new Thread(() -> uploadToCloudinaryAndSave(report, selectedFile)).start();
+    }
+
+    private void uploadToCloudinaryAndSave(Report report, File imageFile) {
+
+        try {
+            InputStream inputStream = new FileInputStream(imageFile);
+            byte[] bytes = inputStream.readAllBytes();
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart(
+                            "file",
+                            imageFile.getName(),
+                            RequestBody.create(bytes, MediaType.parse("image/*"))
+                    )
+                    .addFormDataPart("upload_preset", UPLOAD_PRESET)
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url("https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/image/upload")
+                    .post(requestBody)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+
+                @Override
+                public void onFailure(Call call, java.io.IOException e) {
+                    Platform.runLater(() ->
+                            showError("Cloudinary upload failed: " + e.getMessage()));
                 }
-            }).start();
+
+                @Override
+                public void onResponse(Call call, Response response) {
+                    try {
+                        if (!response.isSuccessful()) {
+                            Platform.runLater(() ->
+                                    showError("Upload failed: " + response.message()));
+                            return;
+                        }
+
+                        String resp = response.body().string();
+                        JSONObject json = new JSONObject(resp);
+                        String cloudinaryUrl = json.getString("secure_url");
+
+                        reportDAO.updateFinalPhoto(report.getId(), cloudinaryUrl);
+                        reportDAO.updateReportStatus(report.getId(), "RESOLVED");
+
+                        Platform.runLater(() -> {
+                            showSuccess("Report marked as resolved with Cloudinary photo!");
+                            loadDashboardData();
+                        });
+
+                    } catch (Exception e) {
+                        Platform.runLater(() ->
+                                showError("Error processing upload: " + e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+        } catch (Exception e) {
+            Platform.runLater(() ->
+                    showError("File upload error: " + e.getMessage()));
+            e.printStackTrace();
         }
     }
+
+
 
     private void showReportDetailsDialog(Report report) {
         javafx.scene.control.Dialog<Void> dialog = new javafx.scene.control.Dialog<>();

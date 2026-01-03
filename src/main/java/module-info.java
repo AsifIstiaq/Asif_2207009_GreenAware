@@ -24,6 +24,8 @@ module com.example.greenaware {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires annotations;
+    requires okhttp3;
+    requires org.json;
 
     opens com.example.greenaware to javafx.fxml;
     exports com.example.greenaware;

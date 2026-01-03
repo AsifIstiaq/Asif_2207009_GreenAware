@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Optional;
 
 import dao.WorkProgressDAO_Firebase;
@@ -8,16 +9,12 @@ import dao.WorkerDAO_Firebase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import models.WorkProgress;
 import models.Worker;
 
@@ -167,6 +164,9 @@ public class WorkersController {
         dialog.setTitle("Work Progress Details");
         dialog.setHeaderText("Progress Report #" + selected.getId());
 
+        dialog.getDialogPane().setPrefWidth(600);
+        dialog.getDialogPane().setPrefHeight(700);
+
         javafx.scene.layout.VBox content = new javafx.scene.layout.VBox(15);
         content.setPadding(new javafx.geometry.Insets(20));
 
@@ -201,13 +201,43 @@ public class WorkersController {
         if (selected.getPhotoPath() != null && !selected.getPhotoPath().isEmpty()) {
             try {
                 ImageView imageView = new ImageView();
-                Image image = new Image(selected.getPhotoPath(), true); // true = load in background
+                Image image = new Image(selected.getPhotoPath(), true);
                 imageView.setImage(image);
-                imageView.setFitWidth(400);
+                imageView.setFitWidth(500);
+                imageView.setFitHeight(350);
                 imageView.setPreserveRatio(true);
+                imageView.setSmooth(true);
+                imageView.setCache(true);
 
-                content.getChildren().add(new Label("Photo:"));
+                Label photoLabel = new Label("Photo:");
+                Button downloadBtn = new Button("Download");
+                HBox photoHeader = new HBox(10, photoLabel, downloadBtn);
+                photoHeader.setAlignment(Pos.CENTER_LEFT);
+
+                content.getChildren().add(photoHeader);
                 content.getChildren().add(imageView);
+
+                downloadBtn.setOnAction(ev -> {
+                    try {
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Save Image");
+                        fileChooser.setInitialFileName("progress_" + selected.getId() + ".jpg");
+                        fileChooser.getExtensionFilters().add(
+                                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png")
+                        );
+                        File saveFile = fileChooser.showSaveDialog(dialog.getOwner());
+                        if (saveFile != null) {
+                            try (InputStream in = new java.net.URL(selected.getPhotoPath()).openStream()) {
+                                java.nio.file.Files.copy(in, saveFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                                showInfo("Image downloaded successfully to:\n" + saveFile.getAbsolutePath());
+                            }
+                        }
+                    } catch (Exception ex) {
+                        showError("Failed to download image: " + ex.getMessage());
+                        ex.printStackTrace();
+                    }
+                });
+
             } catch (Exception e) {
                 content.getChildren().add(new Label("Failed to load photo"));
             }
@@ -242,6 +272,14 @@ public class WorkersController {
                 showError("Failed to filter: " + e.getMessage());
             }
         });
+    }
+
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void showError(String message) {

@@ -276,7 +276,6 @@ public class UserReportsController {
     }
 
 
-
     private void showReportDetailsDialog(Report report) {
         javafx.scene.control.Dialog<Void> dialog = new javafx.scene.control.Dialog<>();
         dialog.setTitle("Report Details");

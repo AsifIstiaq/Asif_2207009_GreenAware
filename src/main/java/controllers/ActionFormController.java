@@ -90,7 +90,6 @@ public class ActionFormController {
             locationField.setText(action.getLocation());
             statusCombo.setValue(action.getStatus());
             actionNoteArea.setText(action.getActionNote());
-            //workerNameField.setText(action.getWorkerName() != null ? action.getWorkerName() : "");
             if (action.getWorkerId() > 0) {
                 workerCombo.getItems().stream()
                         .filter(w -> w.getId() == action.getWorkerId())

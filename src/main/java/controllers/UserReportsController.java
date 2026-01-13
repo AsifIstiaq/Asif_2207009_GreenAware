@@ -47,10 +47,6 @@ public class UserReportsController {
     }
 
     private void setupTable() {
-        idColumn.setCellValueFactory(
-                cell -> cell.getValue().idProperty().asObject()
-        );
-
         reporterColumn.setCellValueFactory(
                 cell -> cell.getValue().reporterNameProperty()
         );

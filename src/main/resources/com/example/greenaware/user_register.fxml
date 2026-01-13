@@ -10,6 +10,7 @@
 
     <center>
         <ScrollPane fitToWidth="true" styleClass="content-container">
+            <StackPane>
             <VBox alignment="CENTER" spacing="15" styleClass="login-container" maxWidth="500">
                 <padding>
                     <Insets top="30" right="40" bottom="30" left="40"/>
@@ -111,6 +112,7 @@
                     </font>
                 </Button>
             </VBox>
+            </StackPane>
         </ScrollPane>
     </center>
 </BorderPane>

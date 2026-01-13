@@ -23,11 +23,6 @@
                 <Font size="14"/>
             </font>
         </Button>
-        <Button text="Edit" onAction="#editAction" styleClass="action-button">
-            <font>
-                <Font size="14"/>
-            </font>
-        </Button>
         <Button text="Mark Completed" onAction="#markCompleted" styleClass="success-button">
             <font>
                 <Font size="14"/>
@@ -44,7 +39,6 @@
 
     <TableView fx:id="actionsTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
             <TableColumn text="Worker" prefWidth="130" fx:id="workerColumn"/>
             <TableColumn text="Location" prefWidth="150" fx:id="locationColumn"/>
             <TableColumn text="Action Note" prefWidth="200" fx:id="actionNoteColumn"/>

@@ -46,9 +46,6 @@ public class WorkersController {
 
     @FXML
     public void initialize() {
-        workerIdColumn.setCellValueFactory(
-                cell -> cell.getValue().idProperty().asObject()
-        );
 
         workerNameColumn.setCellValueFactory(
                 cell -> cell.getValue().nameProperty()
@@ -72,10 +69,6 @@ public class WorkersController {
 
         workersTable.setItems(workers);
 
-
-        progressIdColumn.setCellValueFactory(
-                cell -> cell.getValue().idProperty().asObject()
-        );
 
         progressWorkerColumn.setCellValueFactory(
                 cell -> cell.getValue().workerNameProperty()
@@ -142,7 +135,6 @@ public class WorkersController {
         alert.setTitle("Worker Details");
         alert.setHeaderText(selected.getName());
         alert.setContentText(
-                "ID: " + selected.getId() + "\n" +
                         "Email: " + selected.getEmail() + "\n" +
                         "Phone: " + selected.getPhone() + "\n" +
                         "Specialization: " + selected.getSpecialization() + "\n" +
@@ -162,7 +154,6 @@ public class WorkersController {
 
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Work Progress Details");
-        dialog.setHeaderText("Progress Report #" + selected.getId());
 
         dialog.getDialogPane().setPrefWidth(600);
         dialog.getDialogPane().setPrefHeight(700);

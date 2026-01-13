@@ -27,6 +27,7 @@ module com.example.greenaware {
     requires okhttp3;
     requires org.json;
 
+    opens models to javafx.base;
     opens com.example.greenaware to javafx.fxml;
     exports com.example.greenaware;
     exports controllers;

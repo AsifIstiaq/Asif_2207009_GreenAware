@@ -2,14 +2,11 @@ package controllers;
 
 import dao.WorkerDAO_Firebase;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import models.Worker;
+import utils.SceneUtil;
 
 public class WorkerLoginController {
     @FXML private TextField emailField;
@@ -43,15 +40,14 @@ public class WorkerLoginController {
                         Thread.sleep(1000);
                         javafx.application.Platform.runLater(() -> {
                             try {
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/worker_dashboard.fxml"));
-                                Parent root = loader.load();
-
-                                WorkerDashboardController controller = loader.getController();
-                                controller.setWorker(worker);
-
-                                Stage stage = (Stage) emailField.getScene().getWindow();
-                                stage.setScene(new Scene(root));
-                                stage.setTitle("Worker Dashboard - " + worker.getName());
+                                SceneUtil.switchScene(
+                                        emailField,
+                                        "worker_dashboard.fxml",
+                                        "Worker Dashboard - " + worker.getName(),
+                                        (WorkerDashboardController controller) -> {
+                                            controller.setWorker(worker);
+                                        }
+                                );
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -73,31 +69,11 @@ public class WorkerLoginController {
 
     @FXML
     public void handleRegister() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/worker_register.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setTitle("Worker Registration");
-        } catch (Exception e) {
-            messageLabel.setText("Error: " + e.getMessage());
-            messageLabel.setStyle("-fx-text-fill: red;");
-            e.printStackTrace();
-        }
+        SceneUtil.switchRoot(emailField, "worker_register.fxml");
     }
 
     @FXML
     public void handleBackToMain() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/home.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("GreenAware - Community Waste Management");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SceneUtil.switchRoot(emailField, "home.fxml");
     }
 }

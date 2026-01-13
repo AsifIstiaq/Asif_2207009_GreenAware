@@ -110,7 +110,6 @@
 
     <TableView fx:id="reportsTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn text="ID" prefWidth="50" fx:id="idColumn"/>
             <TableColumn text="Category" prefWidth="150" fx:id="categoryColumn"/>
             <TableColumn text="Location" prefWidth="180" fx:id="locationColumn"/>
             <TableColumn text="Date" prefWidth="100" fx:id="dateColumn"/>

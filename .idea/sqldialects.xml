@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/ActionDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/AdminDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/GalleryDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/ReportDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/UserDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/WorkProgressDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/dao/WorkerDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/utils/AdminSeeder.java" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/main/java/utils/DatabaseHelper.java" dialect="SQLite" />
   </component>

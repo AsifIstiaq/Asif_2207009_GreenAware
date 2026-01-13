@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import models.Action;
 import models.Worker;
+import utils.SceneUtil;
 
 public class WorkerDashboardController {
     @FXML private Label welcomeLabel;
@@ -34,11 +35,6 @@ public class WorkerDashboardController {
 
     @FXML
     public void initialize() {
-
-    idColumn.setCellValueFactory(
-            cell -> cell.getValue().idProperty().asObject()
-    );
-
     locationColumn.setCellValueFactory(
             cell -> cell.getValue().locationProperty()
     );
@@ -100,13 +96,11 @@ public class WorkerDashboardController {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Assignment Details");
-            alert.setHeaderText("Work Assignment #" + selected.getId());
             alert.setContentText(
                     "Location: " + (location != null ? location : "N/A") + "\n" +
                             "Description: " + selected.getActionNote() + "\n" +
                             "Deadline: " + selected.getDeadline() + "\n" +
-                            "Status: " + selected.getStatus() + "\n" +
-                            "Resolution Details: " + (selected.getResolutionDetails() != null ? selected.getResolutionDetails() : "N/A")
+                            "Status: " + selected.getStatus()
             );
             alert.showAndWait();
         } catch (Exception e) {
@@ -151,15 +145,7 @@ public class WorkerDashboardController {
 
     @FXML
     public void handleLogout() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/worker_login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Worker Login");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SceneUtil.switchRoot(welcomeLabel, "worker_login.fxml");
     }
 
     private void showError(String message) {

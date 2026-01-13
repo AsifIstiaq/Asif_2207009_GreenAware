@@ -46,7 +46,16 @@ public class UserReportController {
 
         try {
             categoryCombo.setItems(javafx.collections.FXCollections.observableArrayList(
-                    "Air pollution", "Noise pollution", "Water pollution"
+                    "Air pollution",
+                    "Noise pollution",
+                    "Water pollution",
+                    "Soil pollution",
+                    "Plastic pollution",
+                    "Industrial waste",
+                    "Deforestation",
+                    "E-waste",
+                    "Chemical spills",
+                    "Other"
             ));
         } catch (Exception e) {
             showError("Error loading categories: " + e.getMessage());

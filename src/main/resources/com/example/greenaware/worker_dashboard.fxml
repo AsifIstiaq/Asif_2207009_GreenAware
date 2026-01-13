@@ -102,7 +102,6 @@
 
         <TableView fx:id="assignmentsTable" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
                 <TableColumn fx:id="locationColumn" text="Location" prefWidth="200"/>
                 <TableColumn fx:id="actionNoteColumn" text="Work Description" prefWidth="250"/>
                 <TableColumn fx:id="deadlineColumn" text="Deadline" prefWidth="120"/>

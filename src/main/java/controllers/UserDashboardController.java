@@ -4,16 +4,13 @@ import dao.ReportDAO_Firebase;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 import models.Report;
 import models.User;
+import utils.SceneUtil;
 import utils.Session;
 
 public class UserDashboardController {
@@ -50,10 +47,6 @@ public class UserDashboardController {
     }
 
     private void setupTable() {
-        idColumn.setCellValueFactory(
-                cell -> cell.getValue().idProperty().asObject()
-        );
-
         categoryColumn.setCellValueFactory(
                 cell -> cell.getValue().categoryNameProperty()
         );
@@ -112,18 +105,7 @@ public class UserDashboardController {
 
     @FXML
     public void handleNewReport() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/greenaware/user_report_form.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) reportsTable.getScene().getWindow();
-            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-            stage.setScene(scene);
-        } catch (Exception e) {
-            showError("Error loading report form: " + e.getMessage());
-            e.printStackTrace();
-        }
+        SceneUtil.switchRoot(reportsTable, "user_report_form.fxml");
     }
 
     @FXML
@@ -144,18 +126,8 @@ public class UserDashboardController {
 
     @FXML
     public void handleLogout() {
-        try {
-            Session.clear();
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/greenaware/home.fxml"));
-            Stage stage = (Stage) reportsTable.getScene().getWindow();
-            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-            stage.setScene(scene);
-            stage.setTitle("GreenAware - Community Waste & Pollution Reporting Manager");
-        } catch (Exception e) {
-            showError("Error during logout: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Session.clear();
+        SceneUtil.switchRoot(reportsTable, "home.fxml");
     }
 
     private void showError(String message) {
@@ -169,13 +141,12 @@ public class UserDashboardController {
     private void showReportDetailsDialog(Report report) {
         javafx.scene.control.Dialog<Void> dialog = new javafx.scene.control.Dialog<>();
         dialog.setTitle("Report Details");
-        dialog.setHeaderText("Report #" + report.getId() + " - " + report.getStatus());
+        dialog.setHeaderText("Report" + " - " + report.getStatus());
 
         javafx.scene.layout.VBox content = new javafx.scene.layout.VBox(15);
         content.setPadding(new javafx.geometry.Insets(20));
         content.setAlignment(javafx.geometry.Pos.TOP_LEFT);
 
-        // Report information
         javafx.scene.layout.GridPane grid = new javafx.scene.layout.GridPane();
         grid.setHgap(15);
         grid.setVgap(10);

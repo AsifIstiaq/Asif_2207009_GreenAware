@@ -121,4 +121,17 @@ public class WorkerRegisterController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void handleBack() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/greenaware/home.fxml"));
+            Stage stage = (Stage) nameField.getScene().getWindow();
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

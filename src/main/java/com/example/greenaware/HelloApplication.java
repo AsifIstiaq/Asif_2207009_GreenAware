@@ -16,9 +16,11 @@ public class HelloApplication extends Application {
         System.out.println("Firebase initialized successfully!");
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1400, 850);
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         stage.setTitle("GreenAware - Community Waste & Pollution Reporting Manager");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

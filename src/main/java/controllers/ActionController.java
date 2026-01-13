@@ -40,9 +40,6 @@ public class ActionController {
     }
 
     private void setupTable() {
-            idColumn.setCellValueFactory(
-                    cell -> cell.getValue().idProperty().asObject()
-            );
 
             workerColumn.setCellValueFactory(
                     cell -> cell.getValue().workerNameProperty()
@@ -92,16 +89,6 @@ public class ActionController {
         showActionDialog(null);
     }
 
-    @FXML
-    public void editAction() {
-        Action selected = actionsTable.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            showWarning("Please select an action to edit");
-            return;
-        }
-        showActionDialog(selected);
-    }
-
     private void showActionDialog(Action action) {
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
@@ -113,7 +100,7 @@ public class ActionController {
             controller.setAction(action);
 
             javafx.stage.Stage dialog = new javafx.stage.Stage();
-            dialog.setTitle(action == null ? "Add Action" : "Edit Action");
+            dialog.setTitle(action == null ? "Add Action" : "");
             dialog.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             dialog.setScene(new javafx.scene.Scene(root));
 
